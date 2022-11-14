@@ -29,39 +29,39 @@ class MysqlConnectionPool :
             self._cnxpool = mysql.connector.pooling.MySQLConnectionPool(**self._dbconfig)
             
 
-    def fetchOne(self, sql, na):
+    def fetchOne(self, sql, na = None):
         try:
             cnx = self._cnxpool.get_connection()
             mycursor = cnx.cursor()
             mycursor.execute(sql, na)
             return mycursor.fetchone()
         except Exception as e:
-            print(e)
+            raise
         finally:
             cnx.close()
             mycursor.close()
         
     
-    def fetchAll(self, sql, na):
+    def fetchAll(self, sql, na = None):
         try:
             cnx = self._cnxpool.get_connection()
             mycursor = cnx.cursor(buffered=True)
             mycursor.execute(sql, na)
             return mycursor.fetchall()
-        except Exception as e:
-            print(e)
+        except Exception :
+            raise 
         finally:
             cnx.close()
             mycursor.close()
     
-    def commitTransaction(self, sql, na):
+    def commitTransaction(self, sql, na = None):
         try:
             cnx = self._cnxpool.get_connection()
             mycursor = cnx.cursor()
             mycursor.execute(sql, na)
             cnx.commit()
-        except Exception as e:
-             print(e)
+        except Exception:
+            raise
         finally:
             cnx.close()
             mycursor.close()
