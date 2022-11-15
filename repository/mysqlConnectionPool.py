@@ -34,7 +34,7 @@ class MysqlConnectionPool :
             cnx = self._cnxpool.get_connection()
             mycursor = cnx.cursor()
             mycursor.execute(sql, na)
-            return mycursor.fetchone()
+            return dict(zip(mycursor.column_names, mycursor.fetchone()))
         except Exception as e:
             raise
         finally:
@@ -47,7 +47,7 @@ class MysqlConnectionPool :
             cnx = self._cnxpool.get_connection()
             mycursor = cnx.cursor(buffered=True)
             mycursor.execute(sql, na)
-            return mycursor.fetchall()
+            return list(map(lambda x: dict(zip(mycursor.column_names, x)), mycursor.fetchall()))
         except Exception :
             raise 
         finally:
