@@ -24,32 +24,43 @@ def thankyou():
 #Api 旅遊景點
 @app.route("/api/attractions")
 def apiAttractions():
-	page = int(request.args.get('page'))
-	keyword = request.args.get('keyword')
-	attractions = ar.getAttractionsByPageAndKeyword(page, keyword )
-	data = {
-		"nextPage":page + 1,
-		"data":	attractions
-		}
-	return data
+	try:
+		page = int(request.args.get('page'))
+		keyword = request.args.get('keyword')
+		attractions = ar.getAttractionsByPageAndKeyword(page, keyword)
+		data = {
+			"nextPage":page + 1,
+			"data":	attractions
+			}
+		return jsonify(data)
+	except Exception as e:
+		return jsonify(data)
+
+
 @app.route("/api/attraction/<attractionId>")
 def apiAttractionByAttractionId(attractionId):
-	return
+	try:
+		attraction = ar.getAttractionsById(attractionId)
+		data = {
+			"data":	attraction
+			}
+		return jsonify(data)
+		
+	except Exception as e:
+		return Response(status = 400)
 
 
 #Api 旅遊景點分類
 @app.route("/api/categories")
 def apiCategories():
-	return
-
-
-
-attraction = ar.getAttractionsById(1)
-
-attractions = ar.getAttractionsByPageAndKeyword()
-
-
-print(attractions)
+	try:
+		apiCategories =list(map(lambda x: x["CAT"], ar.getCategories())) 
+		data = {
+			"data":	apiCategories
+			}
+		return jsonify(data)
+	except Exception as e:
+		print(e)
 
 if __name__ == "__main__":
     app.run(port=3000, debug = True) 

@@ -21,8 +21,6 @@ class AttractionRepository :
             }
         return data
 
-
-
     def getAttractionsByPageAndKeyword(self, page = 1, keyword = ""):
         try:
             sql = "SELECT * FROM attraction WHERE name LIKE (%s) AND _id > (%s) order by _id limit 12;"
