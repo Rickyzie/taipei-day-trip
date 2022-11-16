@@ -4,8 +4,8 @@ class MysqlConnectionPool :
     # 加底線表示為私有變數
     _dbconfig = {
     "host":"localhost",      
-    "user":"root",    
-    "passwd":"aa24572880",   
+    "user":"debian-sys-maint",    
+    "passwd":"K0TyBR2qvL74OFgE",   
     "database": "taipei_attractions",
     "pool_name": "mypool",
     "pool_size": 5
