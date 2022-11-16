@@ -1,11 +1,19 @@
 from flask import *
 from repository.attractionRepository import AttractionRepository
+import re
+
+
 
 ar =  AttractionRepository()
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
+
+def replace_all_blank(value):
+    return re.sub('\W+', '', value).replace("_", '')
+
+
 
 # Pages 
 @app.route("/")
@@ -26,28 +34,50 @@ def thankyou():
 def apiAttractions():
 	try:
 		page = int(request.args.get('page'))
-		keyword = request.args.get('keyword')
+		if(request.args.get('keyword') == None):
+			keyword = ""
+		else:
+			keyword = replace_all_blank(request.args.get('keyword'))
 		attractions = ar.getAttractionsByPageAndKeyword(page, keyword)
+		if(len(attractions)>12):
+			nextPage = page + 1
+		else:
+			nextPage = None
 		data = {
-			"nextPage":page + 1,
+			"nextPage":nextPage,
 			"data":	attractions
 			}
 		return jsonify(data)
-	except Exception as e:
-		return jsonify(data)
+
+	except ValueError :
+		return jsonify({"error": True,"message": "Invalid argument"}), 400
+	except Exception as e :
+		return jsonify({"error": True,"message": "server error"}), 500
 
 
 @app.route("/api/attraction/<attractionId>")
 def apiAttractionByAttractionId(attractionId):
 	try:
+		#check attractionId is int string or not 
+		if(not attractionId.isdigit()):
+			raise TypeError
+
 		attraction = ar.getAttractionsById(attractionId)
 		data = {
 			"data":	attraction
 			}
+		#attractionId cant found data
+		if (attraction == None):
+			raise ValueError
+			
 		return jsonify(data)
-		
+
+	except TypeError :
+		return jsonify({"error": True,"message": "Invalid argument"}), 400
+	except ValueError :
+		return jsonify({"error": True,"message": "Id not found"}), 400
 	except Exception as e:
-		return Response(status = 400)
+		return jsonify({"error": True,"message": "server error"}), 500
 
 
 #Api 旅遊景點分類
@@ -59,8 +89,8 @@ def apiCategories():
 			"data":	apiCategories
 			}
 		return jsonify(data)
-	except Exception as e:
-		print(e)
+	except Exception:
+		return jsonify({"error": True,"message": "server error"}), 500
 
 if __name__ == "__main__":
     app.run(port=3000, debug = True) 
