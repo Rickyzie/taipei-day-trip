@@ -6,7 +6,7 @@ class AttractionRepository :
 
     def __init__(self):
         self.mcp = MysqlConnectionPool.getInstance()
-
+        
     def toApiAttraction(self, attraction):
         data = { 
                 "id": attraction["_id"],
@@ -18,8 +18,17 @@ class AttractionRepository :
                 "mrt": attraction["MRT"],
                 "lat": attraction["latitude"],
                 "lng": attraction["longitude"],
+                "images": self.getfileListById( attraction["_id"]) 
             }
         return data
+    
+    def getfileListById(self, _id):
+        try:
+            sql = "SELECT * FROM file_list WHERE attraction_id = (%s) ;"
+            na = (_id, )
+            return list(map(lambda x: x["file"], self.mcp.fetchAll(sql,na)))
+        except Exception as e:
+            print(e)
 
     def getAttractionsByPageAndKeyword(self, page = 0, keyword = ""):
         try:
@@ -36,14 +45,6 @@ class AttractionRepository :
             sql = "SELECT * FROM attraction WHERE _id = (%s) ;"
             na = (_id, )
             return self.toApiAttraction(self.mcp.fetchOne(sql,na))
-        except Exception as e:
-            print(e)
-    
-    def getfileListById(self, _id):
-        try:
-            sql = "SELECT * FROM file_list WHERE attraction_id = (%s) ;"
-            na = (_id, )
-            return list(map(lambda x: x["file"], self.mcp.fetchAll(sql,na)))
         except Exception as e:
             print(e)
             
