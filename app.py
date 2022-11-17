@@ -39,7 +39,7 @@ def apiAttractions():
 		else:
 			keyword = replace_all_blank(request.args.get('keyword'))
 		attractions = ar.getAttractionsByPageAndKeyword(page, keyword)
-		if(len(attractions)>12):
+		if(len(attractions) == 12):
 			nextPage = page + 1
 		else:
 			nextPage = None

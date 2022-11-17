@@ -21,11 +21,11 @@ class AttractionRepository :
             }
         return data
 
-    def getAttractionsByPageAndKeyword(self, page = 1, keyword = ""):
+    def getAttractionsByPageAndKeyword(self, page = 0, keyword = ""):
         try:
-            sql = "SELECT * FROM attraction WHERE name LIKE (%s) AND _id > (%s) order by _id limit 12;"
+            sql = "SELECT * FROM attraction WHERE concat(name, CAT) LIKE %s order by _id limit %s, 12;"
             keyword = "%" + keyword + "%" 
-            page = (page - 1) * 12
+            page = (page) * 12
             na = ( keyword, page)
             return list(map(lambda x: self.toApiAttraction(x), self.mcp.fetchAll(sql,na)))
         except Exception as e:
