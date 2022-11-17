@@ -13,8 +13,6 @@ app.config["TEMPLATES_AUTO_RELOAD"]=True
 def replace_all_blank(value):
     return re.sub('\W+', '', value).replace("_", '')
 
-
-
 # Pages 
 @app.route("/")
 def index():
