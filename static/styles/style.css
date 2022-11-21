@@ -1,0 +1,257 @@
+:root {
+    --PRIMARY_COLOR: #448899;
+    --SECONDARY_COLOR: #757575;
+    --SECONDARY_COLOR_GRAY_70: #666666;
+    --GRAY_700: #757575;
+    --ADDITIONAL_COLOR_WHITE: #FFFFFF;
+    --PRIMARY_BORDER: rgba(0, 0, 0, .1);
+
+    /* background-color*/
+    --COPYRIGHT_BACKGROUND: #757575;
+    --WHITE_BACKGROUND: #FFFFFF;
+    --TITLE_BACKGROUND: rgba(0, 0, 0, .6);
+}
+
+div {
+    box-sizing: border-box;
+}
+body {
+    overflow-x: hidden;
+    height: 100%;
+    width:100%;
+    margin:0px;
+}
+
+.Navbar {
+    top: 0px;
+    display: flex;
+    position: fixed;
+    z-index: 9999;
+    background-color: var(--ADDITIONAL_COLOR_WHITE);
+    justify-content: space-between;
+    font-size: 20px;
+    width: 100%;
+    height: 54px;
+    line-height:54px;
+}
+.NavbarContent{
+    margin: 0px auto;
+    background-color: var(--WHITE_BACKGROUND);
+    width:100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.NavSlogan {
+
+    color: var(--PRIMARY_COLOR);
+    margin-left: 20px;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 54px;
+}
+
+.NavItem {
+
+    background-color: var(--ADDITIONAL_COLOR_WHITE);
+    text-decoration:none;
+    color:black;
+    display: flex;
+    margin-right: 20px;
+}
+
+
+.NavItem .Item {
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    line-height: 54px;
+    color: var(--SECONDARY_COLOR_GRAY_70);
+    text-decoration: none;
+    display: block;
+    margin-left: 20px;
+}
+
+.Carousel {
+    margin-top: 54px;
+    width: 100%;
+    height: 320px;
+    background: url(../images/wehelp_101.png);
+    background-size: cover;
+}
+
+.CarouselContent {
+    padding: 85px 15px 0 15px;
+    margin:0px auto;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.CarouselSloganFirst {
+    color: var(--ADDITIONAL_COLOR_WHITE);
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.CarouselSloganSecond {
+    color: var(--ADDITIONAL_COLOR_WHITE);
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.CarouselSearch {
+    display:flex; 
+    align-items:flex-end;
+    border-radius: 10px;
+
+}
+
+.CarouselSearch input {
+    border: 0;
+    border-radius: 5px 0px 0px 5px;
+    box-sizing: border-box;
+    padding: 15px;
+    font-weight: 700;
+    font-size: 16px;
+    width: 400px;
+    height: 46px;
+    background: var(--ADDITIONAL_COLOR_WHITE);
+}
+
+.CarouselSearch button {
+    border: 0;
+    border-radius: 0px 5px 5px 0px;
+    background: var(--PRIMARY_COLOR);
+    height: 46px;
+    width: 60px;
+}
+.CarouselSearch button img {
+    background: var(--PRIMARY_COLOR);
+    height: 30px;
+    width: 30px;
+}
+
+
+.Container {
+    width: 100%;
+    background-color: var(--WHITE_BACKGROUND);
+}
+
+
+
+.Content {
+    padding: 0px 15px;
+    margin: 40px auto 0 auto;
+    background-color: var(--WHITE_BACKGROUND);
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}@media (max-width:1200px){
+    .Content {
+        width: 90%;   
+    }
+}@media (max-width:600px){
+    .Content {
+        width: 90%;
+    }
+}
+
+.Top {
+    width: calc(50% - 20px);
+    height: 50px;
+    margin: 10px;
+    background-color: rgb(40, 161, 180);
+    display: flex;
+}@media (max-width:1200px){
+    .Top{
+        width: calc(50% - 20px);
+        margin: 10px;
+    }
+}@media (max-width:600px){
+    .Top{
+        width: calc(100% - 20px);
+        margin: 5px;
+    }
+}
+
+
+.Context {
+    margin: auto  5px;
+}
+
+.Card {
+    position: relative;
+    width: calc(25%);
+    max-width: 270px;
+    margin:15px 0px;
+    border: 2px solid var(--PRIMARY_BORDER);
+    border-radius: 5px;
+}@media (max-width:1200px){
+    .Card{
+        width: calc(50% - 20px);
+        margin: 10px;
+    }
+}@media (max-width:600px){
+    .Card{
+        width: calc(100% - 20px);
+        margin: 10px;
+    }
+}
+
+.Card .ImgWrapper{
+    width: 100%;
+    height: 197px;
+    background-size: cover;
+}
+
+img{
+    width:100%;
+    height: 100%;
+    object-fit:fill;
+}
+
+.Title {
+    position: absolute;
+    bottom: 45px;
+    height: 40px;
+    width: 100%;
+    background-color: var(--TITLE_BACKGROUND);
+    color: var(--ADDITIONAL_COLOR_WHITE);
+    line-height:20px;
+    padding: 10px;
+    font-weight: 700;
+}
+
+.Detail {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    line-height:25px;
+    font-weight: 500;
+    color: var(--SECONDARY_COLOR);
+}
+
+.Footer {
+    position: fixed;
+    display: flex;
+    width:100%;
+    height: 104px;
+    bottom: 0;
+    background: var(--GRAY_700);
+}
+
+.FooterContent{
+    color: var(--ADDITIONAL_COLOR_WHITE);
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    max-width: 1200px;
+    line-height: 104px;
+}
