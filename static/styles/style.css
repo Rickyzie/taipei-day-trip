@@ -46,7 +46,7 @@ body {
 .NavSlogan {
 
     color: var(--PRIMARY_COLOR);
-    margin-left: 20px;
+    margin-left: 10px;
     font-weight: 700;
     font-size: 30px;
     line-height: 54px;
@@ -58,7 +58,7 @@ body {
     text-decoration:none;
     color:black;
     display: flex;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 
@@ -71,6 +71,7 @@ body {
     text-decoration: none;
     display: block;
     margin-left: 20px;
+    font-size: 16px;
 }
 
 .Carousel {
@@ -164,63 +165,40 @@ body {
 
 
 
-.Content {
-    padding: 0px 15px;
-    margin: 40px auto 0 auto;
+.Content {  
+    margin: 55px auto 104px auto;
     background-color: var(--WHITE_BACKGROUND);
     max-width: 1200px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
 }@media (max-width:1200px){
     .Content {
-        width: 90%;   
+        grid-template-columns: auto auto ;
     }
 }@media (max-width:600px){
     .Content {
-        width: 90%;
+        grid-template-columns: auto ;
     }
 }
-
-.Top {
-    width: calc(50% - 20px);
-    height: 50px;
-    margin: 10px;
-    background-color: rgb(40, 161, 180);
-    display: flex;
-}@media (max-width:1200px){
-    .Top{
-        width: calc(50% - 20px);
-        margin: 10px;
-    }
-}@media (max-width:600px){
-    .Top{
-        width: calc(100% - 20px);
-        margin: 5px;
-    }
-}
-
 
 .Context {
     margin: auto  5px;
 }
 
 .Card {
+    margin: 0 auto 30px auto;
     position: relative;
-    width: calc(25%);
+    width: 100%;
     max-width: 270px;
-    margin:15px 0px;
     border: 2px solid var(--PRIMARY_BORDER);
     border-radius: 5px;
 }@media (max-width:1200px){
-    .Card{
-        width: calc(50% - 20px);
-        margin: 10px;
+    .Card {
+        max-width: 321px;
     }
 }@media (max-width:600px){
-    .Card{
-        width: calc(100% - 20px);
-        margin: 10px;
+    .Card {
+        max-width: 321px;
     }
 }
 
