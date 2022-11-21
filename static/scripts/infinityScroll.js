@@ -12,7 +12,7 @@ const option = {
 const handleObserver = (entries) => {
     const target = entries[0];
     if (target.isIntersecting && canScroll && nextPage) {
-        getData(counter++)
+        getData(nextPage)
     }
 };
 

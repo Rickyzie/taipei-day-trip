@@ -1,6 +1,6 @@
-async function getData(page){
+async function getData(page, keyword = ""){
     try{
-        const response = await fetch(`/api/attractions?page=${page}`);
+        const response = await fetch(`/api/attractions?page=${page}&keyword=${keyword}`);
         const results = await response.json();
         results.data.map((val)=>{
             CardComponent(val);
@@ -12,6 +12,16 @@ async function getData(page){
     }
 }
 
+async function getCategories(){
+    try{
+        const response = await fetch(`/api/categories`);
+        const results = await response.json();
+        SearchAutoCompleteComponent(results.data)
+    }catch(err){
+        console.log(err)
+    }
+}
+getCategories()
 
 
 
