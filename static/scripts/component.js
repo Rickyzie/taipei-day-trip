@@ -3,7 +3,6 @@ function SearchAutoCompleteComponent(list){
         const divSelected = document.createElement("div");
         divSelected.textContent = val;
         divSelected.setAttribute("class", "SearchAutoCompleteItem");
-        divSelected.cloneNode(true);
         document.querySelector(".SearchAutoComplete").appendChild(divSelected.cloneNode(true));
     })
     const SearchAutoCompleteItem = document.querySelectorAll('.SearchAutoCompleteItem')
