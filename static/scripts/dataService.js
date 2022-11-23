@@ -1,8 +1,12 @@
 export default class DataService {
     
     static instance = null;
-    
-    constructor() {}
+
+    constructor() {
+        this.nextPage = 0;
+        this.keyword = "";
+        this.canScroll = true;
+    }
 
     static getInstance() {
         if (DataService.instance === null) {
@@ -11,13 +15,23 @@ export default class DataService {
         return DataService.instance;
     }
 
-    async renderWithAttractionsList(component, page, keyword = ""){
+    getNextPage(){
+        return this.nextPage;
+    }
+    getKeyword(){
+        return this.keyword;
+    }
+
+    async renderWithAttractionsList(component, page, keyword){
         try{
+            if(!this.canScroll) return;
+            this.canScroll = false;
             const response = await fetch(`/api/attractions?page=${page}&keyword=${keyword}`);
-            const { data } = await response.json();
+            const { data, nextPage } = await response.json();
             component(data)
-            canScroll = true;
-            nextPage = results.nextPage
+            this.canScroll = true;
+            this.nextPage = nextPage;
+            this.keyword = keyword;
         }catch(err){
             console.log(err)
         }
