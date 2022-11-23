@@ -9,7 +9,7 @@ class CarouselSearchController {
         this.contentController = ContentController.getInstance();
         this.render(this.CarouselSearchComponent);
         this.CarouselButtonHandler();
-        this.SearchAutoCompleteHandler();
+        this.SearchAutoCompleteToggleHandler();
     }
 
     render(component){
@@ -25,7 +25,7 @@ class CarouselSearchController {
         });
     }
 
-    SearchAutoCompleteHandler(){
+    SearchAutoCompleteToggleHandler(){
         this.SearchAutoComplete = document.querySelector('.SearchAutoComplete')
         this.CarouselSearch = document.querySelector(".CarouselSearch");
         this.CarouselInput = document.querySelector(".CarouselInput");
