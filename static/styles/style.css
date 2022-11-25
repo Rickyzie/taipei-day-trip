@@ -2,6 +2,7 @@
     --PRIMARY_COLOR: #448899;
     --SECONDARY_COLOR: #757575;
     --SECONDARY_COLOR_GRAY_70: #666666;
+    --GRAY_20: #E8E8E8;
     --GRAY_700: #757575;
     --ADDITIONAL_COLOR_WHITE: #FFFFFF;
     --PRIMARY_BORDER: rgba(0, 0, 0, .1);
@@ -172,7 +173,12 @@ body {
     font-size: 14px;
     line-height: 28px;
     cursor: pointer;
+    border-radius: 5px;
 }
+
+.SearchAutoCompleteItem:hover{
+    background-color: var(--GRAY_20);
+  }
 
 .Container {
     width: 100%;
