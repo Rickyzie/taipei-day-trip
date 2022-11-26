@@ -27,19 +27,14 @@ class CarouselSearchController {
 
     SearchAutoCompleteToggleHandler(){
         this.SearchAutoComplete = document.querySelector('.SearchAutoComplete')
-        this.CarouselSearch = document.querySelector(".CarouselSearch");
         this.CarouselInput = document.querySelector(".CarouselInput");
-        document.addEventListener("click", e => {
-            console.log(this.SearchAutoComplete)
-            if (this.CarouselSearch == e.target || this.CarouselInput.contains(e.target)) {
-                this.SearchAutoComplete.classList.toggle("show");
-            }else if (this.SearchAutoComplete.classList.contains("show")){
-                this.SearchAutoComplete.classList.toggle("show");
-            }else{
-                return;
-            }
+        this.CarouselInput.addEventListener("focus", e => {
+            this.SearchAutoComplete.classList.add("show");
         });
-
+        this.CarouselInput.addEventListener("blur", e => {
+            this.SearchAutoComplete.classList.remove("show");
+            
+        });
     }
 
     CarouselSearchComponent(list){
