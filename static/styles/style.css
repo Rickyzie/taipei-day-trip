@@ -1,0 +1,279 @@
+:root {
+    --PRIMARY_COLOR: #448899;
+    --SECONDARY_COLOR: #757575;
+    --SECONDARY_COLOR_GRAY_70: #666666;
+    --GRAY_20: #E8E8E8;
+    --GRAY_700: #757575;
+    --ADDITIONAL_COLOR_WHITE: #FFFFFF;
+    --PRIMARY_BORDER: rgba(0, 0, 0, .1);
+    --BOX_SHADOW: #AABBCC;
+    /* background-color*/
+    --COPYRIGHT_BACKGROUND: #757575;
+    --WHITE_BACKGROUND: #FFFFFF;
+    --TITLE_BACKGROUND: rgba(0, 0, 0, .6);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans TC';
+}
+
+
+div {
+    box-sizing: border-box;
+}
+body {
+    overflow-x: hidden;
+    height: 100%;
+    width:100vw;
+    margin:0px;
+    
+}
+
+.Navbar {
+    top: 0px;
+    display: flex;
+    position: fixed;
+    z-index: 9999;
+    background-color: var(--ADDITIONAL_COLOR_WHITE);
+    justify-content: space-between;
+    font-size: 20px;
+    width: 100vw;
+    height: 54px;
+    line-height:54px;
+}
+.NavbarContent{
+    margin: 0px auto;
+    background-color: var(--WHITE_BACKGROUND);
+    width:100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.NavSlogan {
+
+    color: var(--PRIMARY_COLOR);
+    margin-left: 10px;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 54px;
+}
+
+.NavItem {
+
+    background-color: var(--ADDITIONAL_COLOR_WHITE);
+    text-decoration:none;
+    color:black;
+    display: flex;
+    margin-right: 10px;
+}
+
+
+.NavItem .Item {
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    line-height: 54px;
+    color: var(--SECONDARY_COLOR_GRAY_70);
+    text-decoration: none;
+    display: block;
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+.Carousel {
+    margin-top: 54px;
+    width: 100%;
+    height: 320px;
+    background: url(../images/wehelp_101.png);
+    background-size: cover;
+}
+
+.CarouselContent {
+    padding: 85px 15px 0 15px;
+    margin:0px auto;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.CarouselSloganFirst {
+    color: var(--ADDITIONAL_COLOR_WHITE);
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.CarouselSloganSecond {
+    color: var(--ADDITIONAL_COLOR_WHITE);
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.CarouselSearch {
+    position: relative;
+    display:flex; 
+    align-items:flex-end;
+    border-radius: 10px;
+
+}
+
+.CarouselSearch input {
+    border: 0;
+    border-radius: 5px 0px 0px 5px;
+    box-sizing: border-box;
+    padding: 15px;
+    font-weight: 700;
+    font-size: 16px;
+    width: 100%;
+    max-width: 400px;
+    height: 46px;
+    background: var(--ADDITIONAL_COLOR_WHITE);
+    box-shadow: 0px 0px 20px var(--BOX_SHADOW);
+}
+
+.CarouselSearch button {
+    cursor: pointer;
+    border: 0;
+    border-radius: 0px 5px 5px 0px;
+    background: var(--PRIMARY_COLOR);
+    height: 46px;
+    width: 60px;
+}
+.CarouselSearch button img {
+    background: var(--PRIMARY_COLOR);
+    height: 30px;
+    width: 30px;
+}
+
+.SearchAutoComplete {
+    display: none; 
+}
+
+.SearchAutoComplete.show{
+    box-shadow: 0px 0px 20px var(--BOX_SHADOW);
+    z-index: 9999;
+    margin-top: 5px;
+    top: 46px;
+    position: absolute;
+    max-width:400px;
+    width: calc(100% - 53);
+    height: 162px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: var(--WHITE_BACKGROUND);
+}
+
+.SearchAutoCompleteItem{
+    font-style: normal;
+    font-weight: 500;
+    width:33%;
+    padding: 10px 15px;
+    font-size: 14px;
+    line-height: 28px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.SearchAutoCompleteItem:hover{
+    background-color: var(--GRAY_20);
+  }
+
+.Container {
+    width: 100%;
+    background-color: var(--WHITE_BACKGROUND);
+}
+
+
+
+.Content {  
+    margin: 55px auto 104px auto;
+    background-color: var(--WHITE_BACKGROUND);
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+}@media (max-width:1200px){
+    .Content {
+        grid-template-columns: 50% 50% ;
+    }
+}@media (max-width:600px){
+    .Content {
+        grid-template-columns: 100% ;
+    }
+}
+
+.Context {
+    margin: auto  5px;
+}
+
+.Card {
+    margin: 0 auto 30px auto;
+    position: relative;
+    width: 100%;
+    max-width: 270px;
+    border: 2px solid var(--PRIMARY_BORDER);
+    border-radius: 5px;
+}@media (max-width:1200px){
+    .Card {
+        max-width: calc(100% - 50px);
+
+    }
+}
+
+.Card .ImgWrapper{
+    width: 100%;
+    min-height: 197px;
+    background-size: cover;
+}@media (max-width:1200px){
+    .Card .ImgWrapper {
+        min-height: 235px;
+    }
+}
+
+img{
+    width:100%;
+    height: 100%;
+    object-fit:fill;
+}
+
+.Title {
+    position: absolute;
+    bottom: 45px;
+    height: 40px;
+    width: 100%;
+    background-color: var(--TITLE_BACKGROUND);
+    color: var(--ADDITIONAL_COLOR_WHITE);
+    line-height:20px;
+    padding: 10px;
+    font-weight: 700;
+}
+
+.Detail {
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    line-height:25px;
+    font-weight: 500;
+    color: var(--SECONDARY_COLOR);
+}
+
+.Footer {
+    display: flex;
+    width:100%;
+    height: 104px;
+    bottom: 0;
+    background: var(--GRAY_700);
+}
+
+.FooterContent{
+    color: var(--ADDITIONAL_COLOR_WHITE);
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    max-width: 1200px;
+    line-height: 104px;
+}

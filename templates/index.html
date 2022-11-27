@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台北一日遊</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class = "Navbar">
+        <div class = "NavbarContent" >
+            <div class = "NavSlogan">
+                台北一日遊
+            </div>
+            <div class = "NavItem" id = "sidbarTrigger" >
+                    <div class = "Item">
+                        預定行程
+                    </div>
+                    <div class = "Item">
+                        登入/註冊
+                    </div>
+            </div>
+        </div>
+    </div>
+    <div class = "Carousel">  
+        <div class = "CarouselContent">  
+            <div class = "CarouselSloganFirst" style = "font-size: 28px">輕鬆享受台北一日悠閒</div>
+            <div class = "CarouselSloganSecond">探索每個角落，體驗城市的深度旅遊行程</div>
+            <form class = "CarouselSearch" action="javascript:void(-1)">
+                <input class = "CarouselInput" name="keyword"  placeholder="輸入景點名稱查詢" type = "text">
+                <button class = "CarouselButton" type="button"><img src="images/icon_search.png"></button>
+                <div class = "SearchAutoComplete">
+                </div>
+            </form>
+        </div>
+    
+    </div>
+    <div class = "Container">
+        <div class = "Content">
+        </div>
+    </div>
+    <div class = "Footer">
+        <div class = "FooterContent">
+            COPYRIGHT © 2021 台北一日遊
+        </div>
+    </div>
+    <div class = "ScrollLoader"></div>
+    <script type="module" src="scripts/dataService.js"></script>
+    <script type="module" src="scripts/carouselSearchController.js"></script>
+    <script type="module" src="scripts/contentController.js"></script>
+    <script type="module" src="scripts/trigger.js"></script>
+</body>

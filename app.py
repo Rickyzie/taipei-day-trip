@@ -5,8 +5,9 @@ import re
 
 
 ar =  AttractionRepository()
-
-app=Flask(__name__)
+app = Flask(__name__,
+            static_folder="static",
+            static_url_path="/")
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 
@@ -91,7 +92,7 @@ def apiCategories():
 		return jsonify({"error": True,"message": "server error"}), 500
 
 if __name__ == "__main__":
-    app.run(port=3000, debug = True)
+    app.run(host="0.0.0.0", port=3000, debug = True)
     app.config["JSON_SORT_KEYS"] = False
 
  
