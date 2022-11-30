@@ -33,7 +33,9 @@ export default class ContentController {
     }
 
     ContentComponent(list){
-        list.map(({category, name, mrt, images}) => {
+        list.map(({category, name, mrt, images, id}) => {
+            const url = document.createElement("a");
+            url.href = `./attraction/${id}`;
             const divCard = document.createElement("div");
             divCard.setAttribute("class", "Card");
         
@@ -57,8 +59,9 @@ export default class ContentController {
             divCard.appendChild(divTitle).textContent = name;
             divDetail.appendChild(divMrt).textContent = mrt;
             divDetail.appendChild(divCategory).textContent = category;
-            divCard.appendChild(divDetail)
-            document.querySelector(".Content").appendChild(divCard);
+            divCard.appendChild(divDetail);
+            url.appendChild(divCard);
+            document.querySelector(".Content").appendChild(url);
         })
     }
 }

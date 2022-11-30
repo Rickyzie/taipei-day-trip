@@ -1,0 +1,318 @@
+.Navbar {
+    top: 0px;
+    display: flex;
+    position: fixed;
+    z-index: 9999;
+    background-color: var(--ADDITIONAL_COLOR_WHITE);
+    justify-content: space-between;
+    font-size: 20px;
+    width: 100vw;
+    height: 54px;
+    line-height:54px;
+    border: 1px solid #E8E8E8;
+}
+.NavbarContent{
+    margin: 0px auto;
+    background-color: var(--WHITE_BACKGROUND);
+    width:100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.NavSlogan {
+
+    color: var(--PRIMARY_COLOR);
+    margin-left: 10px;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 54px;
+}
+
+.NavItem {
+
+    background-color: var(--ADDITIONAL_COLOR_WHITE);
+    text-decoration:none;
+    color:black;
+    display: flex;
+    margin-right: 10px;
+}
+
+
+.NavItem .Item {
+    font-family: 'Noto Sans TC';
+    font-style: normal;
+    font-weight: 500;
+    line-height: 54px;
+    color: var(--SECONDARY_COLOR_GRAY_70);
+    text-decoration: none;
+    display: block;
+    margin-left: 20px;
+    font-size: 16px;
+}
+
+
+
+.Content {
+    margin: 91px auto 0px auto;
+    max-width: 1200px;
+}
+
+.Main {
+    position: relative;
+    display: grid;
+    grid-template-columns: 540px 30px 600px ;
+    max-height: 400px;
+    margin: 0 15px 50px 15px;
+}@media (max-width:1200px){
+    .Main {
+        grid-template-columns: 540px 0px 600px ;
+
+    }
+}
+
+.AttractionReserve {
+    display: grid;
+    grid-template-rows: 90px 310px;
+}
+
+.AttractionCarousel {
+    overflow: hidden;
+    display: grid;
+    grid-auto-flow: column;  
+    grid-auto-columns: 540px;
+    scroll-behavior: smooth;
+    max-width: 540px;
+    border-radius: 5px;
+}
+
+.ImgWrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.ImgWrapper img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.LeftArrow {
+    cursor: pointer;
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    left: 10px;
+    top: 185px;
+
+    background: url(../images/btn_leftArrow.png)
+}
+
+.RightArrow {
+    cursor: pointer;
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    left: calc(50% - 88px);
+    top: 185px;
+
+    background: url(../images/btn_rightArrow.png)
+}
+
+.NavigationDots{
+    transform: translateX(-50%);
+    position: absolute;
+    display: grid;
+    grid-auto-flow: column; 
+    bottom: 13px;
+    left: 25%;
+}
+
+.Dot{
+    margin: 0px 6px;
+    width: 12px;
+    height: 12px;
+    background: url(../images//circle_unactive.png);
+    background-repeat: no-repeat;
+}
+
+.Dot.active{
+    margin: 0px 6px;
+    width: 12px;
+    height: 12px;
+    background: url(../images//circle_active.png);
+    background-repeat: no-repeat;
+}
+
+.AttractionReserveTop {
+    color : var(--SECONDARY_COLOR_GRAY_70)
+}
+
+.AttractionReserveTop .Name{
+    margin-bottom: 15px;
+    max-width: 600px;
+    height: 33px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.AttractionReserveTop .CategoryAtMrt{
+    max-width: 600px;
+    height: 22px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+}
+
+.AttractionReserveBottom{
+    color: var(--SECONDARY_COLOR_GRAY_70);
+    background-color: var(--GRAY_20);
+    padding: 15px 20px 0 20px;
+    border-radius: 5px;
+    width: 100%;
+    height: 310px;
+}
+
+.AttractionReserveBottom .title{
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.AttractionReserveBottom .text{
+    font-size: 16px;
+    font-weight: 500 ;
+    margin-bottom: 24px;
+}
+
+.Reserve div:nth-child( 1 ){
+    margin-top: -8px;
+}
+
+.Reserve div:nth-child( 2 ){
+    margin-top: 24px;
+}
+
+.Reserve div:nth-child( 3 ){
+    margin-top: 15px;
+}
+.Reserve button {
+    margin-top: 20px;
+
+}
+
+.Value {
+    width: 81px;
+    height: 22px;
+    font-size: 16px;
+    line-height: 13px;
+    font-weight: 700;
+}
+
+
+input[type="radio"] {
+    margin: 0 0 0 12px;
+    position: relative;
+    appearance: none;
+    background-color: #fff;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: var(--ADDITIONAL_COLOR_WHITE);
+    transform: translateY(5.5px);
+}
+
+input[type="radio"]::before {
+    position: absolute;
+    top:2px;
+    left:2px;
+    content: "";
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+
+input[type="radio"]:checked::before {
+    background-color: var(--PRIMARY_COLOR);
+}
+
+.ReserveDate{
+    margin-left: 12px;
+    width: 193px;
+    height: 35px;
+    padding: 5px 10px;
+    font-size: 16px;
+    border: none;
+}
+
+.Cost{
+    margin-left: 12px;
+}
+
+.ReserveButton {
+    border-radius: 5px;
+    width: 154px;
+    height: 36px;
+    color: var(--ADDITIONAL_COLOR_WHITE);
+    font-size: 19px;
+    line-height: 36px;
+    background: var(--PRIMARY_COLOR);
+    padding-top: 10px 20px 10px 20px;
+    text-decoration: none;
+    margin-bottom: 41px;
+    border: none;
+    cursor: pointer;
+}
+.ReserveDetail{
+    height: 100%;
+    margin: 50px auto 120px;
+    max-width: 1200px;
+    font-size: 16px;
+    color: var(--SECONDARY_COLOR_GRAY_70);
+    margin-bottom: 120px;
+}
+.ReserveDescription{
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.ReserveDetail .title{
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.ReserveAddress{
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.ReserveTransport{
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 20px;
+
+}
+
+.Footer {
+    display: flex;
+    width:100%;
+    height: 104px;
+    bottom: 0;
+    background: var(--GRAY_700);
+}
+
+.FooterContent{
+    color: var(--ADDITIONAL_COLOR_WHITE);
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    max-width: 1200px;
+    line-height: 104px;
+}
