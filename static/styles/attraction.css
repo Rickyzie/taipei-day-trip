@@ -18,10 +18,6 @@
     max-width: 1200px;
     display: flex;
     justify-content: space-between;
-}@media (max-width: 800px){
-    .NavbarContent{
-        margin: 54px auto 0px auto;
-    }
 }
 
 .NavSlogan {
@@ -60,6 +56,10 @@
 .Content {
     margin: 91px auto 0px auto;
     max-width: 1200px;
+}@media (max-width: 800px){
+    .Content{
+        margin: 54px auto 0px auto;
+    }
 }
 
 .Main {
