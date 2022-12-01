@@ -18,6 +18,10 @@
     max-width: 1200px;
     display: flex;
     justify-content: space-between;
+}@media (max-width: 800px){
+    .NavbarContent{
+        margin: 54px auto 0px auto;
+    }
 }
 
 .NavSlogan {
@@ -76,7 +80,8 @@
 
 }@media (max-width:800px){
     .CarouselWrapper {
-        width: 100%;
+        width: calc(100% + 30px);
+        margin: 0px -15px;
     }
 }
 
