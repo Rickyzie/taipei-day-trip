@@ -1,0 +1,31 @@
+:root {
+    --PRIMARY_COLOR: #448899;
+    --SECONDARY_COLOR: #757575;
+    --SECONDARY_COLOR_GRAY_70: #666666;
+    --GRAY_20: #E8E8E8;
+    --GRAY_700: #757575;
+    --ADDITIONAL_COLOR_WHITE: #FFFFFF;
+    --PRIMARY_BORDER: rgba(0, 0, 0, .1);
+    --BOX_SHADOW: #AABBCC;
+    /* background-color*/
+    --COPYRIGHT_BACKGROUND: #757575;
+    --WHITE_BACKGROUND: #FFFFFF;
+    --TITLE_BACKGROUND: rgba(0, 0, 0, .6);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Noto Sans TC';
+}
+
+body {
+    overflow-x: hidden;
+    height: 100%;
+    width:100%;
+    margin:0px;
+    
+}
+
+a {
+    text-decoration:none;
+}

@@ -37,6 +37,17 @@ export default class DataService {
         }
     }
 
+    async renderWithAttractionId(component, id, callback){
+        try{
+            const response = await fetch(`/api/attraction/${id}`);
+            const { data } = await response.json();
+            component(data)
+            if(callback )callback();
+        }catch(err){
+            console.log(err)
+        }
+    }
+
     async  renderWithCategoriesList(component){
         try{
             const response = await fetch(`/api/categories`);

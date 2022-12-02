@@ -4,42 +4,90 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <title>台北一日遊</title>
+    <link rel="stylesheet" type="text/css" href="../../styles/attraction.css">
+    <link rel="stylesheet" type="text/css" href="../../styles/global.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class = "loginModal">
+        
+    </div>
     <div class = "Navbar">
-        <div class = "NavSlogan">
-            My Website
-        </div>
-        <div class = "NavItem" id = "sidbarTrigger" >
-            <a class = "ItemWrapper" href="###" style="text-decoration:none">
-                <div class = "Item">
-                    Item1
-                </div>
-                <div class = "Item">
-                    Item2
-                </div>
-                <div class = "Item">
-                    Item3
-                </div>
-                <div class = "Item">
-                    Item4
-                </div>
-            </a>
-        </div>
-        <a href="#sidbarTrigger" class = "HamburgerIcon">
-            <img  src="./png/icon.png">
-        </a>
-    </div>
-    <div class = "Carousel">   
-            Welcome to MyHome
-    </div>
-    <div class = "Container">
-        <div class = "Content">
+        <div class = "NavbarContent" >
+            <div class = "NavSlogan">
+                台北一日遊
+            </div>
+            <div class = "NavItem" id = "sidbarTrigger" >
+                    <div class = "Item">
+                        預定行程
+                    </div>
+                    <div class = "Item">
+                        登入/註冊
+                    </div>
+            </div>
         </div>
     </div>
-    <div class = "ScrollLoader"></div>
-    <script src="scripts/component.js"></script>
-    <script src="scripts/fetchData.js"></script>
-    <script src="scripts/infinityScroll.js"></script>
+ 
+    <div class ="Content">
+        <div class = "Main">
+            <div class = "CarouselWrapper">
+                <div class = "LeftArrow"></div>
+                <div class = "RightArrow"></div>
+                <div class = "NavigationDots"></div>
+                <div class = "AttractionCarousel"></div>
+            </div>
+            <div class = "AttractionReserve">
+                <div class = "AttractionReserveTop">
+                    <div class = "Name"></div>
+                    <div class = "CategoryAtMrt"></div>
+                </div>
+
+                <div class = "AttractionReserveBottom">
+                    <div class = "title">訂購導覽行程</div>
+                    <div class = "text">以此景點為中心的一日行程，帶你探索城市角落故事</div>
+                    <form class="Reserve">
+                        <div>
+                            <label class = "Value">選擇日期:
+                                <input class = "ReserveDate" type="date" name="reserveDate" placeholder="dd-mm-yyyy">
+                            </label>
+                        </div>
+                        <div >
+                            <label class = "Value">選擇時間:
+                                <label><input class = "ReserveTime" type="radio" name="reserveTime" value="morning" checked>上半天</label>
+                                <label><input class = "ReserveTime" type="radio" name="reserveTime" value="afternoon">下半天</label>                   
+                            </label>
+                        </div>
+                        <div >
+                            <label class = "Value">導覽費用:
+                                <label class = "Cost"></label>                
+                            </label>
+                        </div>
+                        <button class = "ReserveButton">開始預約行程</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class ="ReserveDetail">
+            <div class = "ReserveDescription"></div>
+            <div class = "title">景點地址:</div>
+            <div class = "ReserveAddress"></div>
+            <div class = "title">交通方式:</div>
+            <div class = "ReserveTransport"></div>
+        </div>
+    </div>
+
+    <div class = "Footer">
+        <div class = "FooterContent">
+            COPYRIGHT © 2021 台北一日遊
+        </div>
+    </div>
+    <script type="module" src="../scripts/dataService.js"></script>
+    <script type="module" src="../scripts/attractionCarouselController.js"></script>
+    <script type="module" src="../scripts/attractionReserveController.js"></script>
+
+
+</body>
