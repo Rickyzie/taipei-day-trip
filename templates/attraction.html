@@ -12,8 +12,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class = "loginModal">
-        
+    <div class = "blackCover"></div>
+    <div class = "LoginModal">
+        <div class  = "TopBorder"></div>
+        <div class = "LoginTitle">登入會員帳號</div>
+        <form class = "LoginForm" action="javascript:void(-1)">
+            <input class = "LoginInput" name = "email" type="email" placeholder="輸入電子信箱">
+            <input class = "LoginInput" name = "password" type="password" placeholder="輸入密碼">
+            <button class="LoginFormButton">登入帳戶</button>
+        </form>
+        <div class = "LoginModalSignup">還沒有帳戶？點此註冊</div>
     </div>
     <div class = "Navbar">
         <div class = "NavbarContent" >
@@ -30,7 +38,6 @@
             </div>
         </div>
     </div>
- 
     <div class ="Content">
         <div class = "Main">
             <div class = "CarouselWrapper">

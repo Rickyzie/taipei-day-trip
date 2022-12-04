@@ -11,6 +11,8 @@
     --COPYRIGHT_BACKGROUND: #757575;
     --WHITE_BACKGROUND: #FFFFFF;
     --TITLE_BACKGROUND: rgba(0, 0, 0, .6);
+    --BLACK: #000000;
+    --GRAY_500: #CCCCCC;
 }
 
 * {
@@ -29,3 +31,142 @@ body {
 a {
     text-decoration:none;
 }
+
+.blackCover {
+    z-index: 99;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: var(--BLACK);
+    opacity: 0.25;
+    top: 0;
+}
+
+.TopBorder {
+    position: absolute;
+    top:0;
+    left: 0;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+    width: 100%;
+    height: 10px;
+}
+
+.LoginModal {
+    overflow: hidden;
+    z-index: 999;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 340px;
+    height: 275px;
+    background: var(--WHITE_BACKGROUND);
+    box-shadow: 0px 4px 60px #AAAAAA;
+    border-radius: 6px;
+    padding: 25px 15px 15px 15px;
+    
+}
+
+.LoginTitle {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: var(--SECONDARY_COLOR_GRAY_70);
+    margin-bottom: 15px;
+}
+
+.LoginInput {
+    width: 310px;
+    height: 47px;
+    background: var(--ADDITIONAL_COLOR_WHITE);
+    border: 1px solid var(--GRAY_500);
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--GRAY_700);
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.LoginFormButton {
+    width: 310px;
+    height: 47px;
+    background: var(--PRIMARY_COLOR);
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--ADDITIONAL_COLOR_WHITE);
+    border: none;
+    margin-bottom: 10px;
+}
+
+.LoginModalSignup{
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--SECONDARY_COLOR_GRAY_70);
+}
+
+.SignupModal {
+    overflow: hidden;
+    z-index: 999;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 340px;
+    height: 332px;
+    background: var(--WHITE_BACKGROUND);
+    box-shadow: 0px 4px 60px #AAAAAA;
+    border-radius: 6px;
+    padding: 25px 15px 15px 15px;
+    
+}
+
+.SignupTitle {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: var(--SECONDARY_COLOR_GRAY_70);
+    margin-bottom: 15px;
+}
+
+.SignupInput {
+    width: 310px;
+    height: 47px;
+    background: var(--ADDITIONAL_COLOR_WHITE);
+    border: 1px solid var(--GRAY_500);
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--GRAY_700);
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.SignupFormButton {
+    width: 310px;
+    height: 47px;
+    background: var(--PRIMARY_COLOR);
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--ADDITIONAL_COLOR_WHITE);
+    border: none;
+    margin-bottom: 10px;
+}
+
+.LoginModalLogin{
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--SECONDARY_COLOR_GRAY_70);
+}
+
+
+
+
