@@ -33,6 +33,7 @@ a {
 }
 
 .blackCover {
+    display: none;
     z-index: 99;
     position: fixed;
     width: 100%;
@@ -51,14 +52,23 @@ a {
     height: 10px;
 }
 
+.CloseButton {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 27px;
+    right: 17px;
+    background: url(../images/icon_close.png);
+}
+
 .LoginModal {
+    display: none;
     overflow: hidden;
     z-index: 999;
     top: 80px;
     left: 50%;
     transform: translateX(-50%);
     position: fixed;
-    display: flex;
     flex-direction: column;
     align-items: center;
     width: 340px;
@@ -110,13 +120,13 @@ a {
 }
 
 .SignupModal {
+    display: none;
     overflow: hidden;
     z-index: 999;
     top: 80px;
     left: 50%;
     transform: translateX(-50%);
     position: fixed;
-    display: flex;
     flex-direction: column;
     align-items: center;
     width: 340px;
