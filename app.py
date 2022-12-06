@@ -1,10 +1,15 @@
 from flask import *
 from repository.attractionRepository import AttractionRepository
+from repository.userRepository import UserRepository
+import time
+import jwt
 import re
 
 
 
 ar =  AttractionRepository()
+ur = UserRepository()
+print(ur.getUserIdByLogin("a@a.com", "aa"))
 app = Flask(__name__,
             static_folder="static",
             static_url_path="/")
@@ -90,6 +95,34 @@ def apiCategories():
 		return jsonify(data)
 	except Exception:
 		return jsonify({"error": True,"message": "server error"}), 500
+
+@app.route("/api/user", methods=["POST"])
+def apiUserSignup():
+	try:
+		isUserRegistered = ur.isUserRegistered(request.form['email'],request.form['password'])
+		if(isUserRegistered): 
+			return jsonify({"error": True,"message": "email already registered"})
+		else:
+			ur.userSingup(
+				request.form['name'],
+				request.form['email'],
+				request.form['password'],
+			)		
+			return jsonify({"ok": True})
+	except TypeError :
+		return jsonify({"error": True,"message": "Invalid argument"}), 400
+	except ValueError :
+		return jsonify({"error": True,"message": "Id not found"}), 400
+	except Exception as e:
+		return jsonify({"error": True,"message": "server error"}), 500
+
+@app.route("/api/user/auth", methods=["PUT"])
+def apiUserLogin():
+	userId = ur.getUserIdByLogin(request.form['email'],request.form['password'])
+	if userId is not None: 
+		response = make_response(jsonify({"ok": True}), 200)
+		response.set_cookie(key='token', value=jwt.encode({"id":userId, "exp": time.time() + 7*24*60*60 }, "secret", algorithm="HS256"), expires=time.time()+6*60)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3000, debug = True)

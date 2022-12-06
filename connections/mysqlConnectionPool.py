@@ -34,7 +34,11 @@ class MysqlConnectionPool :
             cnx = self._cnxpool.get_connection()
             mycursor = cnx.cursor()
             mycursor.execute(sql, na)
-            return dict(zip(mycursor.column_names, mycursor.fetchone()))
+            data = mycursor.fetchone()
+            if data is not None:
+                return dict(zip(mycursor.column_names, data))
+            else:
+                return None
         except Exception as e:
             raise
         finally:

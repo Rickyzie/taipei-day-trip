@@ -33,7 +33,6 @@ a {
 }
 
 .blackCover {
-    display: none;
     z-index: 99;
     position: fixed;
     width: 100%;
@@ -61,24 +60,35 @@ a {
     background: url(../images/icon_close.png);
 }
 
-.LoginModal {
-    display: none;
+.Modal {
     overflow: hidden;
     z-index: 999;
     top: 80px;
     left: 50%;
     transform: translateX(-50%);
     position: fixed;
-    flex-direction: column;
-    align-items: center;
     width: 340px;
-    height: 275px;
     background: var(--WHITE_BACKGROUND);
     box-shadow: 0px 4px 60px #AAAAAA;
     border-radius: 6px;
     padding: 25px 15px 15px 15px;
     
 }
+
+.ToggleBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Login.ToggleBox.none {
+    display: none;
+}
+
+.Signup.ToggleBox.none {
+    display: none;
+}
+
 
 .LoginTitle {
     font-weight: 700;
