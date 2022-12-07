@@ -118,10 +118,24 @@ def apiUserSignup():
 
 @app.route("/api/user/auth", methods=["PUT"])
 def apiUserLogin():
-	userId = ur.getUserIdByLogin(request.form['email'],request.form['password'])
+	userId = ur.getUserIdByLogin(request.json['email'],request.json['password'])
 	if userId is not None: 
 		response = make_response(jsonify({"ok": True}), 200)
-		response.set_cookie(key='token', value=jwt.encode({"id":userId, "exp": time.time() + 7*24*60*60 }, "secret", algorithm="HS256"), expires=time.time()+6*60)
+		response.set_cookie(key='token', value=jwt.encode({"id":userId, "exp": time.time() + 7*24*60*60 }, "secret", algorithm="HS256"), expires=time.time() + 7*24*60*60)
+		return response
+	return jsonify({"error": True,"message": "Id not found"}), 400
+
+@app.route("/api/user/auth", methods=["GET"])
+def apiGetUserAuth():
+	try:
+		decodeJwt = jwt.decode(request.cookies.get('token'), 'secret', algorithms='HS256')
+		userProfile = ur.getUserProfileById(decodeJwt["id"])
+		return jsonify({"data":userProfile}), 200
+	except Exception as e :
+		print(e)
+		return jsonify({"error": True,"message": "Id not found"}), 400
+
+
 
 
 if __name__ == "__main__":

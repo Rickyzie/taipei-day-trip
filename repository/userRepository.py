@@ -27,7 +27,7 @@ class UserRepository :
         try:
             sql = "SELECT id FROM user WHERE email = (%s) AND password = (%s);"
             na = (email, password)
-            return self.mcp.fetchOne(sql,na)
+            return self.mcp.fetchOne(sql,na)["id"]
         except Exception as e:
             print("getUserIdByLogin")
             print(e)
