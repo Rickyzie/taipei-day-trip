@@ -32,7 +32,8 @@ a {
     text-decoration:none;
 }
 
-.blackCover {
+.BlackCover {
+    display: none;
     z-index: 99;
     position: fixed;
     width: 100%;
@@ -40,6 +41,10 @@ a {
     background: var(--BLACK);
     opacity: 0.25;
     top: 0;
+}
+
+.BlackCover.show {
+    display: block;
 }
 
 .TopBorder {
@@ -61,6 +66,7 @@ a {
 }
 
 .Modal {
+    display: none;
     overflow: hidden;
     z-index: 999;
     top: 80px;
@@ -72,21 +78,24 @@ a {
     box-shadow: 0px 4px 60px #AAAAAA;
     border-radius: 6px;
     padding: 25px 15px 15px 15px;
-    
+}
+
+.Modal.show {
+    display: block;
 }
 
 .ToggleBox {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
 }
 
-.Login.ToggleBox.none {
-    display: none;
+.Login.ToggleBox.show {
+    display: flex;
 }
 
-.Signup.ToggleBox.none {
-    display: none;
+.Signup.ToggleBox.show {
+    display: flex;
 }
 
 
