@@ -1,7 +1,11 @@
 import MemberService from "./memberService.js";
-class ModalController {
+export default class ModalController {
+
+    static instance = null;
 
     #memberService = null;
+
+  
     
     constructor(){
         this.#memberService = MemberService.getInstance();
@@ -10,6 +14,13 @@ class ModalController {
         this.ChangeModalToSignupHandler();
         this.ChangeModalToLoginHandler();
         this.CloseButtonHandler();
+    }
+
+    static getInstance() {
+        if (ModalController.instance === null) {
+            ModalController.instance = new ModalController();
+        }
+        return ModalController.instance;
     }
 
     LoginFormHandler(){
@@ -84,7 +95,6 @@ class ModalController {
     }
 }
 
-const modalController = new ModalController();
+const modalController = ModalController.getInstance();
 
-document.querySelector('.OpenModal.Item').onclick = modalController.OpenModal;
 

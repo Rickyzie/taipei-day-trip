@@ -27,6 +27,19 @@ export default class MemberService {
         }
     }
 
+    async getMemberWithCookie(){
+        try{
+            const requestOptions = {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+            };
+            const response = await fetch('/api/user/auth', requestOptions);
+            const data = await response.json();
+            console.log(data)
+        }catch(err){
+            console.log(err)
+        }
+    }
 
 }
 

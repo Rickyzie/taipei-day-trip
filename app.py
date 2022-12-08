@@ -123,7 +123,7 @@ def apiUserLogin():
 		response = make_response(jsonify({"ok": True}), 200)
 		response.set_cookie(key='token', value=jwt.encode({"id":userId, "exp": time.time() + 7*24*60*60 }, "secret", algorithm="HS256"), expires=time.time() + 7*24*60*60)
 		return response
-	return jsonify({"error": True,"message": "Id not found"}), 400
+	return jsonify({"error": True,"message": "account not found"}), 400
 
 @app.route("/api/user/auth", methods=["GET"])
 def apiGetUserAuth():
@@ -131,6 +131,16 @@ def apiGetUserAuth():
 		decodeJwt = jwt.decode(request.cookies.get('token'), 'secret', algorithms='HS256')
 		userProfile = ur.getUserProfileById(decodeJwt["id"])
 		return jsonify({"data":userProfile}), 200
+	except Exception as e :
+		print(e)
+		return jsonify({"data": None}), 400
+
+@app.route("/api/user/auth", methods=["GET"])
+def apiUserLogout():
+	try:
+		response = make_response(jsonify({"ok": True}), 200)
+		response.set_cookie(key='token', value="", expires=0)
+		return response
 	except Exception as e :
 		print(e)
 		return jsonify({"error": True,"message": "Id not found"}), 400
