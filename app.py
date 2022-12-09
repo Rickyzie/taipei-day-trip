@@ -9,7 +9,6 @@ import re
 
 ar =  AttractionRepository()
 ur = UserRepository()
-print(ur.getUserIdByLogin("a@a.com", "aa"))
 app = Flask(__name__,
             static_folder="static",
             static_url_path="/")
@@ -99,14 +98,15 @@ def apiCategories():
 @app.route("/api/user", methods=["POST"])
 def apiUserSignup():
 	try:
-		isUserRegistered = ur.isUserRegistered(request.form['email'],request.form['password'])
-		if(isUserRegistered): 
-			return jsonify({"error": True,"message": "email already registered"})
+		isExist = ur.isEmailOrPasswordExist(request.json['email'],request.json['password'])
+		print(isExist)
+		if isExist:
+			return jsonify({"error": True,"message": "email or password already registered"})
 		else:
 			ur.userSingup(
-				request.form['name'],
-				request.form['email'],
-				request.form['password'],
+				request.json['name'],
+				request.json['email'],
+				request.json['password'],
 			)		
 			return jsonify({"ok": True})
 	except TypeError :
@@ -114,6 +114,7 @@ def apiUserSignup():
 	except ValueError :
 		return jsonify({"error": True,"message": "Id not found"}), 400
 	except Exception as e:
+		print(e)
 		return jsonify({"error": True,"message": "server error"}), 500
 
 @app.route("/api/user/auth", methods=["PUT"])
@@ -131,11 +132,14 @@ def apiGetUserAuth():
 		decodeJwt = jwt.decode(request.cookies.get('token'), 'secret', algorithms='HS256')
 		userProfile = ur.getUserProfileById(decodeJwt["id"])
 		return jsonify({"data":userProfile}), 200
+	except jwt.PyJWTError as e :
+		print(e)
+		return jsonify({"data": None}), 200
 	except Exception as e :
 		print(e)
-		return jsonify({"data": None}), 400
+		return jsonify({"error": True,"message": "sever error"}), 500
 
-@app.route("/api/user/auth", methods=["GET"])
+@app.route("/api/user/auth", methods=["DELETE"])
 def apiUserLogout():
 	try:
 		response = make_response(jsonify({"ok": True}), 200)

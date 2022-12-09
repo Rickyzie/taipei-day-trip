@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- 共用元件區域 -->
     <!-- 登入及註冊modal -->
     <div class = "BlackCover"></div>
     <div class = "Modal">
@@ -19,12 +20,14 @@
         <div class = "CloseButton"></div>
         <div class = "Login ToggleBox show">
             <div class = "LoginTitle">登入會員帳號</div>
-            <form class = "LoginForm">
+            <form class = "LoginForm" action="javascript:void(-1)">
                 <input class = "LoginInput" name = "email" type="email" placeholder="輸入電子信箱">
                 <input class = "LoginInput" name = "password" type="password" placeholder="輸入密碼">
                 <button class="LoginFormButton">登入帳戶</button>
             </form>
             <div class = "ChangeModalToSignup ToggleWord">還沒有帳戶？點此註冊</div>
+            <div class = LoginMessage></div>
+
         </div>
         <div class = "Signup ToggleBox">
             <div class = "SignupTitle">註冊會員帳號</div>
@@ -35,9 +38,10 @@
                 <button class="SignupFormButton">註冊新帳戶</button>
             </form>
             <div class = "ChangeModalToLogin ToggleWord">已經有帳戶了？點此登入</div>
+            <div class = SignupMessage></div>
         </div>
     </div>
-
+    <!-- 上方導覽列 -->
     <div class = "Navbar">
         <div class = "NavbarContent" >
             <a href="/">
@@ -49,12 +53,16 @@
                     <div class = "Item">
                         預定行程
                     </div>
-                    <div class = "OpenModal Item">
+                    <div class = "OpenModal Item show">
                         登入/註冊
+                    </div>
+                    <div class = "LogoutModal Item">
+                        登出系統
                     </div>
             </div>
         </div>
     </div>
+    <!-- 共用元件區域 -->
     <div class = "Carousel">  
         <div class = "CarouselContent">  
             <div class = "CarouselSloganFirst" style = "font-size: 28px">輕鬆享受台北一日悠閒</div>

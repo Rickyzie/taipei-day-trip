@@ -1,26 +1,88 @@
 import ModalController from "./modalController.js";
 import MemberService from "./memberService.js";
-class NavbarController {
+export default class NavbarController {
 
     modalController = null;
 
     #memberService = null;
 
+    openModal = null;
+
+    OpenModalEvent = null;
+
+    static instance = null;
+
+    static getInstance() {
+        if (NavbarController.instance === null) {
+            NavbarController.instance = new NavbarController();
+        }
+        return NavbarController.instance;
+    }
+
     constructor(){
         this.modalController = ModalController.getInstance();
         this.#memberService = MemberService.getInstance();
-        this.initMemberData();
-        this.OpenModalHandler();
+        this.#memberService.getMemberWithCookie((result)=>{this.InitOpenModal(result)})
+        this.AddOpenModalHandler();
+        this.AddLogoutModalHandler();
     }
 
-    initMemberData(){
-        this.#memberService.getMemberWithCookie();
+    InitOpenModal(result){
+        if(result.data){
+            this.ChangeOpenModalToLogout();
+        }
     }
 
-    OpenModalHandler(){
-        document.querySelector('.OpenModal.Item').onclick = this.modalController.OpenModal;
+    logoutMemberData(){
+        this.#memberService.Logout()
+    };
+
+    loginAndlogoutToggle(){
+        this.openModal = document.querySelector('.OpenModal.Item');
+        this.openModalEvent = this.modalController.OpenModal;
+        this.openModal.removeEventListener("click", this.openModalEvent);
+        this.openModal.textContent = "登出";
+        this.logoutEvent = this.logoutMemberData();
+        this.openModal.addEventListener("click", this.logoutEvent);
+    }
+
+    ChangeOpenModalToLogout(){
+        const openModal = document.querySelector('.OpenModal.Item');
+        const logoutModal = document.querySelector('.LogoutModal.Item');
+
+        if(openModal.classList.contains("show")){
+            openModal.classList.remove("show");
+        }
+        if(!logoutModal.classList.contains("show")){
+            logoutModal.classList.add("show");
+        }
+    }
+
+    ChangeLogoutModalToOpen(){
+        const openModal = document.querySelector('.OpenModal.Item');
+        const logoutModal = document.querySelector('.LogoutModal.Item');
+
+        if(logoutModal.classList.contains("show")){
+            logoutModal.classList.remove("show");
+        }
+        if(!openModal.classList.contains("show")){
+            openModal.classList.add("show");
+        }
+    }
+
+    AddOpenModalHandler(){
+        this.openModal = document.querySelector('.OpenModal.Item');
+        this.openModalEvent = this.modalController.OpenModal;
+        this.openModal.addEventListener("click", this.openModalEvent);
+    }
+
+    AddLogoutModalHandler(){
+        this.logoutModal = document.querySelector('.LogoutModal.Item');
+        this.logoutModal.addEventListener("click", ()=>{
+            this.#memberService.Logout();
+        });
     }
 
 }
 
-const navbarController = new NavbarController();
+const navbarController = NavbarController.getInstance();

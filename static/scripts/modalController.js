@@ -11,6 +11,7 @@ export default class ModalController {
         this.#memberService = MemberService.getInstance();
 
         this.LoginFormHandler();
+        this.SignupFormHandler();
         this.ChangeModalToSignupHandler();
         this.ChangeModalToLoginHandler();
         this.CloseButtonHandler();
@@ -23,13 +24,34 @@ export default class ModalController {
         return ModalController.instance;
     }
 
+    Login(){
+        document.querySelector(".LoginMessage").textContent ="";
+        const loginFormData = this.getLoginFormData();
+        this.#memberService.Login(loginFormData, (result)=>{
+            document.querySelector(".LoginMessage").textContent = result;
+        });
+    }
+
+    Signup(){
+        document.querySelector(".SignupMessage").textContent ="";
+        const signupFormData = this.getSignupFormData();
+        this.#memberService.Signup(signupFormData, (result)=>{
+            document.querySelector(".SignupMessage").textContent = result;
+        });
+    }
+
     LoginFormHandler(){
         const loginFormButton = document.querySelector('.LoginFormButton');
         loginFormButton.addEventListener("click", ()=>{
-            const loginFormData = this.getLoginFormData();
-            this.#memberService.Login(loginFormData);
+            this.Login();
         })
+    }
 
+    SignupFormHandler(){
+        const signupFormButton = document.querySelector('.SignupFormButton');
+        signupFormButton.addEventListener("click", ()=>{
+            this.Signup();
+        })
     }
 
     ChangeModalToSignupHandler(){
@@ -93,6 +115,7 @@ export default class ModalController {
             password: signupFormData.get("password"),
         };
     }
+    
 }
 
 const modalController = ModalController.getInstance();

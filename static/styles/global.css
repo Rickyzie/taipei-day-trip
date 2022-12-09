@@ -190,12 +190,31 @@ a {
     margin-bottom: 10px;
 }
 
+.SignupMessage{
+    color: var(--SECONDARY_COLOR_GRAY_70);
+}
+
 .ToggleWord{
     font-weight: 500;
     font-size: 16px;
     color: var(--SECONDARY_COLOR_GRAY_70);
 }
 
+.OpenModal.Item{
+    display: none;
+}
+
+.LogoutModal.Item{
+    display: none;
+}
+
+.OpenModal.Item.show{
+    display: flex;
+}
+
+.LogoutModal.Item.show{
+    display: flex;
+}
 
 
 
