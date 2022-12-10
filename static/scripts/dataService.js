@@ -27,10 +27,14 @@ export default class DataService {
             if(!this.canScroll) return;
             this.canScroll = false;
             const response = await fetch(`/api/attractions?page=${page}&keyword=${keyword}`);
-            const { data, nextPage } = await response.json();
-            component(data)
+            const result = await response.json();
+            if(result.error){
+                console.log(result)
+                return
+            }
+            component(result.data)
             this.canScroll = true;
-            this.nextPage = nextPage;
+            this.nextPage = result.nextPage;
             this.keyword = keyword;
         }catch(err){
             console.log(err)
@@ -40,19 +44,28 @@ export default class DataService {
     async renderWithAttractionId(component, id, callback){
         try{
             const response = await fetch(`/api/attraction/${id}`);
-            const { data } = await response.json();
-            component(data)
-            if(callback )callback();
+            const result = await response.json();
+            if(result.error){
+                console.log(result)
+                return
+            }
+            component(result.data)
+            if(callback) callback();
         }catch(err){
             console.log(err)
         }
     }
 
-    async  renderWithCategoriesList(component){
+    async  renderWithCategoriesList(component, callback){
         try{
             const response = await fetch(`/api/categories`);
-            const { data } = await response.json();
-            component(data)
+            const result = await response.json();
+            if(result.error){
+                console.log(result)
+                return
+            }
+            component(result.data)
+            if(callback) callback();
         }catch(err){
             console.log(err)
         }
