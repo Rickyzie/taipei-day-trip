@@ -11,6 +11,8 @@
     --COPYRIGHT_BACKGROUND: #757575;
     --WHITE_BACKGROUND: #FFFFFF;
     --TITLE_BACKGROUND: rgba(0, 0, 0, .6);
+    --BLACK: #000000;
+    --GRAY_500: #CCCCCC;
 }
 
 * {
@@ -26,6 +28,204 @@ body {
     
 }
 
+button {
+    cursor: pointer;
+}
+
 a {
     text-decoration:none;
 }
+
+.BlackCover {
+    display: none;
+    z-index: 99;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: var(--BLACK);
+    opacity: 0.25;
+    top: 0;
+}
+
+.BlackCover.show {
+    display: block;
+}
+
+.TopBorder {
+    position: absolute;
+    top:0;
+    left: 0;
+    background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+    width: 100%;
+    height: 10px;
+}
+
+.CloseButton {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 27px;
+    right: 17px;
+    background: url(../images/icon_close.png);
+}
+
+.Modal {
+    display: none;
+    overflow: hidden;
+    z-index: 999;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: fixed;
+    width: 340px;
+    background: var(--WHITE_BACKGROUND);
+    box-shadow: 0px 4px 60px #AAAAAA;
+    border-radius: 6px;
+    padding: 25px 15px 15px 15px;
+}
+
+.Modal.show {
+    display: block;
+}
+
+.ToggleBox {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.Login.ToggleBox.show {
+    display: flex;
+}
+
+.Signup.ToggleBox.show {
+    display: flex;
+}
+
+
+.LoginTitle {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: var(--SECONDARY_COLOR_GRAY_70);
+    margin-bottom: 15px;
+}
+
+.LoginInput {
+    width: 310px;
+    height: 47px;
+    background: var(--ADDITIONAL_COLOR_WHITE);
+    border: 1px solid var(--GRAY_500);
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--GRAY_700);
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.LoginFormButton {
+    width: 310px;
+    height: 47px;
+    background: var(--PRIMARY_COLOR);
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--ADDITIONAL_COLOR_WHITE);
+    border: none;
+    margin-bottom: 10px;
+}
+
+.LoginModalSignup{
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--SECONDARY_COLOR_GRAY_70);
+}
+
+.SignupModal {
+    display: none;
+    overflow: hidden;
+    z-index: 999;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: fixed;
+    flex-direction: column;
+    align-items: center;
+    width: 340px;
+    height: 332px;
+    background: var(--WHITE_BACKGROUND);
+    box-shadow: 0px 4px 60px #AAAAAA;
+    border-radius: 6px;
+    padding: 25px 15px 15px 15px;
+    
+}
+
+.SignupTitle {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: var(--SECONDARY_COLOR_GRAY_70);
+    margin-bottom: 15px;
+}
+
+.SignupInput {
+    width: 310px;
+    height: 47px;
+    background: var(--ADDITIONAL_COLOR_WHITE);
+    border: 1px solid var(--GRAY_500);
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--GRAY_700);
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.SignupFormButton {
+    width: 310px;
+    height: 47px;
+    background: var(--PRIMARY_COLOR);
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 19px;
+    color: var(--ADDITIONAL_COLOR_WHITE);
+    border: none;
+    margin-bottom: 10px;
+}
+
+.LoginMessage{
+    color: var(--SECONDARY_COLOR_GRAY_70);
+}
+
+.SignupMessage{
+    color: var(--SECONDARY_COLOR_GRAY_70);
+}
+
+.ToggleWord{
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--SECONDARY_COLOR_GRAY_70);
+}
+
+.OpenModal.Item{
+    display: none;
+}
+
+.LogoutModal.Item{
+    display: none;
+}
+
+.OpenModal.Item.show{
+    display: flex;
+    cursor: pointer;
+}
+
+.LogoutModal.Item.show{
+    display: flex;
+    cursor: pointer;
+}
+
+
+

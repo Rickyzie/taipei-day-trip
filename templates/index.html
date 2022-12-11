@@ -12,28 +12,64 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- 共用元件區域 -->
+    <!-- 登入及註冊modal -->
+    <div class = "BlackCover"></div>
+    <div class = "Modal">
+        <div class  = "TopBorder"></div>
+        <div class = "CloseButton"></div>
+        <div class = "Login ToggleBox show">
+            <div class = "LoginTitle">登入會員帳號</div>
+            <form class = "LoginForm" action="javascript:void(-1)">
+                <input class = "LoginInput" name = "email" type="text" placeholder="輸入電子信箱">
+                <input class = "LoginInput" name = "password" type="password" placeholder="輸入密碼">
+                <button type = "submit" class="LoginFormButton">登入帳戶</button>
+            </form>
+            <div class = "ChangeModalToSignup ToggleWord">還沒有帳戶？點此註冊</div>
+            <div class = LoginMessage></div>
+
+        </div>
+        <div class = "Signup ToggleBox">
+            <div class = "SignupTitle">註冊會員帳號</div>
+            <form class = "SignupForm" action="javascript:void(-1)">
+                <input class = "SignupInput" name = "name" type="text" placeholder="輸入姓名">
+                <input class = "SignupInput" name = "email" type="text" placeholder="輸入電子郵件">
+                <input class = "SignupInput" name = "password" type="password" placeholder="輸入密碼">
+                <button type = "submit" class="SignupFormButton">註冊新帳戶</button>
+            </form>
+            <div class = "ChangeModalToLogin ToggleWord">已經有帳戶了？點此登入</div>
+            <div class = SignupMessage></div>
+        </div>
+    </div>
+    <!-- 上方導覽列 -->
     <div class = "Navbar">
         <div class = "NavbarContent" >
-            <div class = "NavSlogan">
-                台北一日遊
-            </div>
+            <a href="/">
+                <div class = "NavSlogan">
+                    台北一日遊
+                </div>
+            </a>
             <div class = "NavItem" id = "sidbarTrigger" >
                     <div class = "Item">
                         預定行程
                     </div>
-                    <div class = "Item">
+                    <div class = "OpenModal Item show">
                         登入/註冊
+                    </div>
+                    <div class = "LogoutModal Item">
+                        登出系統
                     </div>
             </div>
         </div>
     </div>
+    <!-- 共用元件區域 -->
     <div class = "Carousel">  
         <div class = "CarouselContent">  
             <div class = "CarouselSloganFirst" style = "font-size: 28px">輕鬆享受台北一日悠閒</div>
             <div class = "CarouselSloganSecond">探索每個角落，體驗城市的深度旅遊行程</div>
-            <form class = "CarouselSearch" action="javascript:void(-1)">
+            <form class = "CarouselSearch">
                 <input class = "CarouselInput" name="keyword"  placeholder="輸入景點名稱查詢" type = "text">
-                <button class = "CarouselButton" type="button"><img src="images/icon_search.png"></button>
+                <button class = "CarouselButton" type="submit"><img src="images/icon_search.png"></button>
                 <div class = "SearchAutoComplete">
                 </div>
             </form>
@@ -51,7 +87,10 @@
     </div>
     <div class = "ScrollLoader"></div>
     <script type="module" src="scripts/dataService.js"></script>
+    <script type="module" src="scripts/memberService.js"></script>
     <script type="module" src="scripts/carouselSearchController.js"></script>
     <script type="module" src="scripts/contentController.js"></script>
+    <script type="module" src="scripts/modalController.js"></script>
     <script type="module" src="scripts/trigger.js"></script>
+    <script type="module" src="scripts/navbarController.js"></script>
 </body>

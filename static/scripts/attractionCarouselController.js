@@ -32,7 +32,6 @@ class AttractionCarouselController {
             divImgWrapper.setAttribute("class", "ImgWrapper");
             divImgWrapper.appendChild(img)
             document.querySelector(".AttractionCarousel").appendChild(divImgWrapper);
-            document.querySelector(".AttractionCarousel").addEventListener("scroll", (e)=>{console.log(e)})
             const dot = document.createElement("div"); 
             dot.setAttribute("class", "Dot")
             document.querySelector(".NavigationDots").appendChild(dot);

@@ -41,7 +41,6 @@ class AttractionReserveController {
                 document.querySelector(".Cost").textContent = arguement[element.value];
             });
         })
-        console.log(ReserveTime)
     }
 
 }

@@ -7,13 +7,16 @@ class CarouselSearchController {
     constructor(){
         this.#dataService = DataService.getInstance();
         this.contentController = ContentController.getInstance();
-        this.render(this.CarouselSearchComponent);
+        this.render(this.SearchAutoCompleteComponent, ()=>{
+            console.log(1)
+            this.SearchAutoCompleteItemHandler();
+        });
         this.CarouselButtonHandler();
         this.SearchAutoCompleteToggleHandler();
     }
 
-    render(component){
-        this.#dataService.renderWithCategoriesList(component)
+    render(component, callback){
+        this.#dataService.renderWithCategoriesList(component, callback)
     }
 
     CarouselButtonHandler(){
@@ -32,23 +35,26 @@ class CarouselSearchController {
             this.SearchAutoComplete.classList.add("show");
         });
         this.CarouselInput.addEventListener("blur", e => {
-            this.SearchAutoComplete.classList.remove("show");
-            
+            setTimeout(()=> this.SearchAutoComplete.classList.remove("show"), 200 )            
         });
     }
 
-    CarouselSearchComponent(list){
+    SearchAutoCompleteItemHandler(){
+        const SearchAutoCompleteItem = document.querySelectorAll('.SearchAutoCompleteItem');
+        SearchAutoCompleteItem.forEach((element)=>{
+            element.addEventListener("click", (e)=>{
+                document.querySelector('.CarouselInput').value = e.target.textContent;
+            })
+        })
+    }
+
+    SearchAutoCompleteComponent(list){
         list.map((val)=>{
             const divSelected = document.createElement("div");
             divSelected.textContent = val;
             divSelected.setAttribute("class", "SearchAutoCompleteItem");
             document.querySelector(".SearchAutoComplete").appendChild(divSelected.cloneNode(true));
-        })
-        const SearchAutoCompleteItem = document.querySelectorAll('.SearchAutoCompleteItem');
-        for(var i=0; i<SearchAutoCompleteItem.length; i++){
-            SearchAutoCompleteItem[i].addEventListener("click", (e)=>{
-                document.querySelector('.CarouselInput').value = e.target.innerHTML});
-        }
+        })  
     }
 }
 

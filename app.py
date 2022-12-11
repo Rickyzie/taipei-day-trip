@@ -1,10 +1,14 @@
 from flask import *
 from repository.attractionRepository import AttractionRepository
+from repository.userRepository import UserRepository
+import time
+import jwt
 import re
 
 
 
 ar =  AttractionRepository()
+ur = UserRepository()
 app = Flask(__name__,
             static_folder="static",
             static_url_path="/")
@@ -90,6 +94,63 @@ def apiCategories():
 		return jsonify(data)
 	except Exception:
 		return jsonify({"error": True,"message": "server error"}), 500
+
+@app.route("/api/user", methods=["POST"])
+def apiUserSignup():
+	try:
+		isExist = ur.isEmailOrPasswordExist(request.json['email'],request.json['password'])
+		print(isExist)
+		if isExist:
+			return jsonify({"error": True,"message": "email or password already registered"})
+		else:
+			ur.userSingup(
+				request.json['name'],
+				request.json['email'],
+				request.json['password'],
+			)		
+			return jsonify({"ok": True})
+	except TypeError :
+		return jsonify({"error": True,"message": "Invalid argument"}), 400
+	except ValueError :
+		return jsonify({"error": True,"message": "Id not found"}), 400
+	except Exception as e:
+		print(e)
+		return jsonify({"error": True,"message": "server error"}), 500
+
+@app.route("/api/user/auth", methods=["PUT"])
+def apiUserLogin():
+	userId = ur.getUserIdByLogin(request.json['email'],request.json['password'])
+	if userId is not None: 
+		response = make_response(jsonify({"ok": True}), 200)
+		response.set_cookie(key='token', value=jwt.encode({"id":userId, "exp": time.time() + 7*24*60*60 }, "secret", algorithm="HS256"), expires=time.time() + 7*24*60*60)
+		return response
+	return jsonify({"error": True,"message": "account not found"}), 400
+
+@app.route("/api/user/auth", methods=["GET"])
+def apiGetUserAuth():
+	try:
+		decodeJwt = jwt.decode(request.cookies.get('token'), 'secret', algorithms='HS256')
+		userProfile = ur.getUserProfileById(decodeJwt["id"])
+		return jsonify({"data":userProfile}), 200
+	except jwt.PyJWTError as e :
+		print(e)
+		return jsonify({"data": None}), 200
+	except Exception as e :
+		print(e)
+		return jsonify({"error": True,"message": "sever error"}), 500
+
+@app.route("/api/user/auth", methods=["DELETE"])
+def apiUserLogout():
+	try:
+		response = make_response(jsonify({"ok": True}), 200)
+		response.set_cookie(key='token', value="", expires=0)
+		return response
+	except Exception as e :
+		print(e)
+		return jsonify({"error": True,"message": "Id not found"}), 400
+
+
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3000, debug = True)
