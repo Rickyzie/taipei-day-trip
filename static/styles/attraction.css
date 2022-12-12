@@ -219,18 +219,18 @@
     margin-bottom: 24px;
 }
 
-.Reserve div:nth-child( 1 ){
+.ReserveForm div:nth-child( 1 ){
     margin-top: -8px;
 }
 
-.Reserve div:nth-child( 2 ){
+.ReserveForm div:nth-child( 2 ){
     margin-top: 24px;
 }
 
-.Reserve div:nth-child( 3 ){
+.ReserveForm div:nth-child( 3 ){
     margin-top: 15px;
 }
-.Reserve button {
+.ReserveForm button {
     margin-top: 20px;
 
 }
