@@ -1,4 +1,4 @@
-import DataService from "./dataService.js";
+import DataService from "../service/dataService.js";
 import ContentController from "./contentController.js"
 class CarouselSearchController {
 

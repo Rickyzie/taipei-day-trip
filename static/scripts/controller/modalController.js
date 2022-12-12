@@ -1,4 +1,4 @@
-import MemberService from "./memberService.js";
+import MemberService from "../service/memberService.js";
 export default class ModalController {
 
     static instance = null;

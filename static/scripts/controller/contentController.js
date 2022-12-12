@@ -1,5 +1,5 @@
-import DataService from "./dataService.js";
-import Trigger from "./trigger.js";
+import DataService from "../service/dataService.js";
+import Trigger from "../global/trigger.js";
 export default class ContentController {
 
     #dataService = null;

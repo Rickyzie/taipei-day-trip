@@ -1,5 +1,5 @@
 import ModalController from "./modalController.js";
-import MemberService from "./memberService.js";
+import MemberService from "../service/memberService.js";
 export default class NavbarController {
 
     modalController = null;
