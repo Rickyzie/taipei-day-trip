@@ -64,6 +64,7 @@ class MysqlConnectionPool :
             mycursor = cnx.cursor()
             mycursor.execute(sql, na)
             cnx.commit()
+            return mycursor.lastrowid
         except Exception:
             raise
         finally:

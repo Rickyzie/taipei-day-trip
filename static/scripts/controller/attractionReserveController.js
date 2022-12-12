@@ -7,8 +7,8 @@ class AttractionReserveController {
     #bookingService;
 
     arguement = {
-        morning:"新台幣2000元",
-        afternoon:"新台幣2500元"
+        morning:2000,
+        afternoon:2500
     };
 
     constructor(){
@@ -47,11 +47,11 @@ class AttractionReserveController {
     }
 
     ReserveTimeHandler(){
-        document.querySelector(".Cost").textContent = this.arguement.morning;
+        document.querySelector(".Cost").textContent = "新台幣" + this.arguement.morning + "元";
         const ReserveTime = document.querySelectorAll("input[name='reserveTime']");
         ReserveTime.forEach((element)=>{
             element.addEventListener('change', () => {
-                document.querySelector(".Cost").textContent = this.arguement[element.value];
+                document.querySelector(".Cost").textContent = "新台幣"+ this.arguement[element.value] + "元";
             });
         })
     }

@@ -15,9 +15,8 @@ export default class BookingService {
     async reserve({attractionId, date, time, price}, callback){
         try{
             console.log(attractionId, date, time, price)
-            return
             const requestOptions = {
-                method: 'PUT',
+                method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
                     attractionId: attractionId,
@@ -26,7 +25,7 @@ export default class BookingService {
                     price:price,
                     })
             };
-            const response = await fetch('/api/user/auth', requestOptions);
+            const response = await fetch('/api/booking', requestOptions);
             const result = await response.json();
             if(result.error){
                 console.log(result);
