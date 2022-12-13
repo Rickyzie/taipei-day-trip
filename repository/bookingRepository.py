@@ -26,24 +26,27 @@ class BookingRepository :
 
     def addAttraction(self, attractionId, date, time, price, userId):
         try:
-            sql = """
-                INSERT INTO taipei_attractions.reservation (attraction_id, date, time, price) VALUES (%s, %s, %s, %s);
-            """
-            na = (attractionId, date, time, price)
-            lastInsertId = self.mcp.commitTransaction(sql,na)
-            print(lastInsertId)
-            sql = """
-                INSERT INTO taipei_attractions.cart (user_id, reservation_id) VALUES (%s, %s);
-            """
-            na = (userId, lastInsertId)
-            self.mcp.commitTransaction(sql,na)
-            return 
+            self.mcp.multipleExecute([
+                (
+                """
+                    INSERT INTO taipei_attractions.reservation (attraction_id, date, time, price) VALUES (%s, %s, %s, %s);
+                """,
+                (attractionId, date, time, price)
+                ),
+                (
+                """
+                    INSERT INTO taipei_attractions.cart (user_id, reservation_id) VALUES (%s, LAST_INSERT_ID());
+                """,
+                (userId,)
+                )
+            ])
+            return "Add Successfully"
         except Exception as e:
             print("addAttraction")
             print(e)
+            raise
 
-
-    def getAttractions(self, id):
+    def getAttractionsById(self, id):
         try:
             sql = """
                 SELECT R.id, group_concat(F.file separator ',') as file, C.user_id, R.attraction_id, A.name, A.address, R.date, R.time, R.price
@@ -56,7 +59,7 @@ class BookingRepository :
                 ON F.attraction_id  = R.attraction_id 
                 WHERE C.user_id = (%s)
                 GROUP BY R.id
-                ORDER by count(R.id);
+                ORDER by R.id;
             """
             na = (id, )
             attractions = self.mcp.fetchAll(sql,na)
@@ -68,17 +71,17 @@ class BookingRepository :
         except Exception as e:
             print("getAttractions")
             print(e)
+            raise
     
     def deleteReservationById(self, reservationId):
         try:
             sql = "DELETE FROM cart WHERE reservation_id = %s;"
-            na = (reservationId,)
-            self.mcp.commitTransaction(sql,na)
             sql = "DELETE FROM reservation WHERE id = %s;"
             na = (reservationId,)
             self.mcp.commitTransaction(sql,na)
-            return 
+            return "delete Successfully"
         except Exception as e:
             print("deleteReservationById")
             print(e)
+            raise
 

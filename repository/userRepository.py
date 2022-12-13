@@ -15,6 +15,7 @@ class UserRepository :
         except Exception as e:
             print("userSingup")
             print(e)
+            raise
 
 
     def getUserProfileById(self, id):
@@ -25,6 +26,7 @@ class UserRepository :
         except Exception as e:
             print("getUserProfileById")
             print(e)
+            raise
     
     def getUserIdByLogin(self, email, password):
         try:
@@ -38,6 +40,7 @@ class UserRepository :
         except Exception as e:
             print("getUserIdByLogin")
             print(e)
+            raise
 
     def isEmailOrPasswordExist(self, email, password):
         try:
@@ -51,3 +54,4 @@ class UserRepository :
         except Exception as e:
             print("isEmailOrPasswordExist")
             print(e)
+            raise

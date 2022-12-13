@@ -29,6 +29,7 @@ class AttractionRepository :
             return list(map(lambda x: x["file"], self.mcp.fetchAll(sql,na)))
         except Exception as e:
             print(e)
+            raise
 
     def getAttractionsByPageAndKeyword(self, page = 0, keyword = ""):
         try:
@@ -39,6 +40,7 @@ class AttractionRepository :
             return list(map(lambda x: self.toApiAttraction(x), self.mcp.fetchAll(sql,na)))
         except Exception as e:
             print(e)
+            raise
 
     def getAttractionsById(self, _id):
         try:
@@ -47,6 +49,7 @@ class AttractionRepository :
             return self.toApiAttraction(self.mcp.fetchOne(sql,na))
         except Exception as e:
             print(e)
+            raise
             
     def getCategories(self):
         try:
@@ -54,4 +57,5 @@ class AttractionRepository :
             return self.mcp.fetchAll(sql)
         except Exception as e:
             print(e)
+            raise
 

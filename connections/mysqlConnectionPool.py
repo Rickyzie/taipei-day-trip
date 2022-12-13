@@ -64,10 +64,27 @@ class MysqlConnectionPool :
             mycursor = cnx.cursor()
             mycursor.execute(sql, na)
             cnx.commit()
+            print(mycursor.lastrowid)
             return mycursor.lastrowid
         except Exception:
             raise
         finally:
+            cnx.close()
+            mycursor.close()
+    
+    def multipleExecute(self, executions):
+        try:
+            cnx = self._cnxpool.get_connection()
+            mycursor = cnx.cursor()
+
+            for execution in executions:
+                mycursor.execute(execution[0], execution[1])
+            return 
+        except Exception as e:
+                cnx.rollback()
+                raise
+        finally:
+            cnx.commit()
             cnx.close()
             mycursor.close()
 

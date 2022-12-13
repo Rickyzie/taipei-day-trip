@@ -180,9 +180,9 @@ def apiAddAttraction():
 def apiGetAttractions():
 	try:
 		decodeJwt = jwt.decode(request.cookies.get('token'), 'secret', algorithms='HS256')
-		attractions = br.getAttractions(decodeJwt["id"])
+		attractions = br.getAttractionsById(decodeJwt["id"])
 		
-		return jsonify({"ok": True})
+		return jsonify({"data": attractions})
 	except TypeError :
 		return jsonify({"error": True,"message": "Invalid argument"}), 400
 	except ValueError :
@@ -204,12 +204,6 @@ def apiDeleteReservation():
 	except Exception as e:
 		print(e)
 		return jsonify({"error": True,"message": "server error"}), 500
-
-
-print(br.getAttractions(18))
-print(br.deleteReservationById(17))
-
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3000, debug = True)
