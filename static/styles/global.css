@@ -217,6 +217,11 @@ a {
     display: none;
 }
 
+.Booking.Item{
+    display: none;
+}
+
+
 .OpenModal.Item.show{
     display: flex;
     cursor: pointer;
@@ -226,6 +231,15 @@ a {
     display: flex;
     cursor: pointer;
 }
+
+.Booking.Item.show{
+    display: none;
+    display: flex;
+    cursor: pointer;
+}
+
+
+
 
 
 

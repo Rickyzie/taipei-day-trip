@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- 共用元件區域 -->
+    <!-- 共用元件區域-Start -->
     <!-- 登入及註冊modal -->
     <div class = "BlackCover"></div>
     <div class = "Modal">
@@ -35,7 +35,7 @@
                 <input class = "SignupInput" name = "name" type="text" placeholder="輸入姓名">
                 <input class = "SignupInput" name = "email" type="text" placeholder="輸入電子郵件">
                 <input class = "SignupInput" name = "password" type="password" placeholder="輸入密碼">
-                <button type = "submit" type = "button" class="SignupFormButton">註冊新帳戶</button>
+                <button type = "submit" class="SignupFormButton">註冊新帳戶</button>
             </form>
             <div class = "ChangeModalToLogin ToggleWord">已經有帳戶了？點此登入</div>
             <div class = SignupMessage></div>
@@ -50,7 +50,12 @@
                 </div>
             </a>
             <div class = "NavItem" id = "sidbarTrigger" >
-                    <div class = "Item">
+                    <a href="/booking">
+                        <div class = "Booking Item">
+                            預定行程
+                        </div>
+                    </a>
+                    <div class = "OpenModal Item show">
                         預定行程
                     </div>
                     <div class = "OpenModal Item show">
@@ -62,7 +67,7 @@
             </div>
         </div>
     </div>
-    <!-- 共用元件區域 -->
+    <!-- 共用元件區域-End -->
     <div class ="Content">
         <div class = "Main">
             <div class = "CarouselWrapper">
