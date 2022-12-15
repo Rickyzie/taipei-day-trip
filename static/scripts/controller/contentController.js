@@ -61,6 +61,7 @@ export default class ContentController {
             divDetail.appendChild(divCategory).textContent = category;
             divCard.appendChild(divDetail);
             url.appendChild(divCard);
+            console.dir(url)
             document.querySelector(".Content").appendChild(url);
         })
     }

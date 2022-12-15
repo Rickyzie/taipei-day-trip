@@ -194,8 +194,8 @@ def apiGetAttractions():
 @app.route("/api/booking", methods=["DELETE"])
 def apiDeleteReservation():
 	try:
-		br.deleteReservationById()
-		
+		print(request.json["id"])
+		br.deleteReservationById(request.json["id"])
 		return jsonify({"ok": True})
 	except TypeError :
 		return jsonify({"error": True,"message": "Invalid argument"}), 400
