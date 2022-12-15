@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.31, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: taipei_attractions
+-- Host: localhost    Database: taipei_attractions
 -- ------------------------------------------------------
--- Server version	8.0.30
+-- Server version	8.0.31-0ubuntu0.22.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -58,32 +58,33 @@ INSERT INTO `attraction` VALUES (1,5,'新北投站下車，沿中山路直走即
 UNLOCK TABLES;
 
 --
--- Table structure for table `chart`
+-- Table structure for table `cart`
 --
 
-DROP TABLE IF EXISTS `chart`;
+DROP TABLE IF EXISTS `cart`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `chart` (
+CREATE TABLE `cart` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `attraction_id` int NOT NULL,
-  `date` date DEFAULT NULL,
-  `time` varchar(45) DEFAULT NULL,
-  `price` int DEFAULT NULL,
+  `user_id` int unsigned NOT NULL,
+  `reservation_id` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `attraction_id_fk_idx` (`attraction_id`),
-  CONSTRAINT `attraction_id_fk` FOREIGN KEY (`attraction_id`) REFERENCES `attraction` (`_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `user_id_idx` (`user_id`),
+  KEY `chart_id_fk_idx` (`reservation_id`),
+  CONSTRAINT `reservation_id_fk` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `chart`
+-- Dumping data for table `cart`
 --
 
-LOCK TABLES `chart` WRITE;
-/*!40000 ALTER TABLE `chart` DISABLE KEYS */;
-/*!40000 ALTER TABLE `chart` ENABLE KEYS */;
+LOCK TABLES `cart` WRITE;
+/*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` VALUES (124,18,124),(125,18,125),(126,18,126),(127,18,127),(128,18,128),(129,18,129),(130,18,130);
+/*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -112,32 +113,33 @@ INSERT INTO `file_list` VALUES (1,'https://www.travel.taipei/d_upload_ttn/scenea
 UNLOCK TABLES;
 
 --
--- Table structure for table `order`
+-- Table structure for table `reservation`
 --
 
-DROP TABLE IF EXISTS `order`;
+DROP TABLE IF EXISTS `reservation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `order` (
+CREATE TABLE `reservation` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int unsigned NOT NULL,
-  `chart_id` int unsigned NOT NULL,
+  `attraction_id` int NOT NULL,
+  `date` date DEFAULT NULL,
+  `time` varchar(45) DEFAULT NULL,
+  `price` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `user_id_idx` (`user_id`),
-  KEY `chart_id_fk_idx` (`chart_id`),
-  CONSTRAINT `chart_id_fk` FOREIGN KEY (`chart_id`) REFERENCES `chart` (`id`),
-  CONSTRAINT `user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `attraction_id_fk_idx` (`attraction_id`),
+  CONSTRAINT `attraction_id_fk` FOREIGN KEY (`attraction_id`) REFERENCES `attraction` (`_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `order`
+-- Dumping data for table `reservation`
 --
 
-LOCK TABLES `order` WRITE;
-/*!40000 ALTER TABLE `order` DISABLE KEYS */;
-/*!40000 ALTER TABLE `order` ENABLE KEYS */;
+LOCK TABLES `reservation` WRITE;
+/*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+INSERT INTO `reservation` VALUES (124,1,'2022-12-10','morning',2000),(125,1,'2022-12-10','morning',2000),(126,1,'2022-12-10','morning',2000),(127,1,'2022-12-10','afternoon',2500),(128,1,'2022-12-10','afternoon',2500),(129,1,'2022-12-10','afternoon',2500),(130,1,'2022-12-10','afternoon',2500);
+/*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -153,8 +155,9 @@ CREATE TABLE `user` (
   `email` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -163,8 +166,13 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (17,'aaa','aaaaaaaa@a.com','1aaaaaaaa'),(18,'a','a@a.com','1aaaaaaa');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'taipei_attractions'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -175,4 +183,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-12 13:35:28
+-- Dump completed on 2022-12-15 22:45:29

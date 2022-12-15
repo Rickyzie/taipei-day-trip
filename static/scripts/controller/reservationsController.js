@@ -15,7 +15,6 @@ export default class ReservationsController {
             this.reservationList = data;
             this.ChangeTotalPrice();
             this.IconDeleteHandler();
-            document.querySelector(".ConfirmForm").classList.add("show");
         })
         this.UserTextHandler();
     }
@@ -29,6 +28,8 @@ export default class ReservationsController {
             document.querySelector(".ReservationNone").classList.add("show");
             return;
         }
+        document.querySelector(".ConfirmForm").classList.add("show");
+
         const arguement = {
             morning:"上半天",
             afternoon:"下半天"
