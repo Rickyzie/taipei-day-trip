@@ -1,5 +1,5 @@
 import ModalController from "./modalController.js";
-import MemberService from "./memberService.js";
+import MemberService from "../service/memberService.js";
 export default class NavbarController {
 
     modalController = null;
@@ -30,6 +30,7 @@ export default class NavbarController {
     InitOpenModal(result){
         if(result.data){
             this.ChangeOpenModalToLogout();
+            this.ChangeOpenModalToBooking();
         }
     }
 
@@ -37,43 +38,32 @@ export default class NavbarController {
         this.#memberService.Logout()
     };
 
-    loginAndlogoutToggle(){
-        this.openModal = document.querySelector('.OpenModal.Item');
-        this.openModalEvent = this.modalController.OpenModal;
-        this.openModal.removeEventListener("click", this.openModalEvent);
-        this.openModal.textContent = "登出";
-        this.logoutEvent = this.logoutMemberData();
-        this.openModal.addEventListener("click", this.logoutEvent);
-    }
-
     ChangeOpenModalToLogout(){
-        const openModal = document.querySelector('.OpenModal.Item');
+        this.openModal = document.querySelectorAll('.OpenModal.Item');
         const logoutModal = document.querySelector('.LogoutModal.Item');
-
-        if(openModal.classList.contains("show")){
-            openModal.classList.remove("show");
-        }
+        this.openModal.forEach((e)=>{
+            if(e.classList.contains("show")){
+                e.classList.remove("show");
+            }
+        })
         if(!logoutModal.classList.contains("show")){
             logoutModal.classList.add("show");
         }
     }
 
-    ChangeLogoutModalToOpen(){
-        const openModal = document.querySelector('.OpenModal.Item');
-        const logoutModal = document.querySelector('.LogoutModal.Item');
-
-        if(logoutModal.classList.contains("show")){
-            logoutModal.classList.remove("show");
-        }
-        if(!openModal.classList.contains("show")){
-            openModal.classList.add("show");
+    ChangeOpenModalToBooking(){
+        const booking = document.querySelector('.Booking.Item');
+        if(!booking.classList.contains("show")){
+            booking.classList.add("show");
         }
     }
 
     AddOpenModalHandler(){
-        this.openModal = document.querySelector('.OpenModal.Item');
+        this.openModal = document.querySelectorAll('.OpenModal.Item');
         this.openModalEvent = this.modalController.OpenModal;
-        this.openModal.addEventListener("click", this.openModalEvent);
+        this.openModal.forEach((e)=>{
+            e.addEventListener("click", this.openModalEvent);
+        })
     }
 
     AddLogoutModalHandler(){

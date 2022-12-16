@@ -1,5 +1,5 @@
-import DataService from "./dataService.js";
-import Trigger from "./trigger.js";
+import DataService from "../service/dataService.js";
+import Trigger from "../global/trigger.js";
 export default class ContentController {
 
     #dataService = null;
@@ -61,6 +61,7 @@ export default class ContentController {
             divDetail.appendChild(divCategory).textContent = category;
             divCard.appendChild(divDetail);
             url.appendChild(divCard);
+            console.dir(url)
             document.querySelector(".Content").appendChild(url);
         })
     }

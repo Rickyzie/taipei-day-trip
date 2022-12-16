@@ -1,6 +1,9 @@
 from flask import *
 from repository.attractionRepository import AttractionRepository
 from repository.userRepository import UserRepository
+from repository.bookingRepository import BookingRepository
+
+
 import time
 import jwt
 import re
@@ -9,6 +12,7 @@ import re
 
 ar =  AttractionRepository()
 ur = UserRepository()
+br = BookingRepository()
 app = Flask(__name__,
             static_folder="static",
             static_url_path="/")
@@ -95,6 +99,7 @@ def apiCategories():
 	except Exception:
 		return jsonify({"error": True,"message": "server error"}), 500
 
+#Api 使用者部份
 @app.route("/api/user", methods=["POST"])
 def apiUserSignup():
 	try:
@@ -149,8 +154,56 @@ def apiUserLogout():
 		print(e)
 		return jsonify({"error": True,"message": "Id not found"}), 400
 
+#Api 預定行程
 
+@app.route("/api/booking", methods=["POST"])
+def apiAddAttraction():
+	try:
+		decodeJwt = jwt.decode(request.cookies.get('token'), 'secret', algorithms='HS256')
+		br.addAttraction(
+			request.json['attractionId'],
+			request.json['date'],
+			request.json['time'],
+			request.json['price'],
+			decodeJwt["id"]
+		)
+		return jsonify({"ok": True})
+	except jwt.PyJWTError as e :
+		return jsonify({"error": True,"message": "NEED_LOGIN"}), 400
+	except ValueError :
+		return jsonify({"error": True,"message": "Id not found"}), 400
+	except Exception as e:
+		print(e)
+		return jsonify({"error": True,"message": "server error"}), 500
 
+@app.route("/api/booking", methods=["GET"])
+def apiGetAttractions():
+	try:
+		decodeJwt = jwt.decode(request.cookies.get('token'), 'secret', algorithms='HS256')
+		attractions = br.getAttractionsById(decodeJwt["id"])
+		
+		return jsonify({"data": attractions})
+	except TypeError :
+		return jsonify({"error": True,"message": "Invalid argument"}), 400
+	except ValueError :
+		return jsonify({"error": True,"message": "Id not found"}), 400
+	except Exception as e:
+		print(e)
+		return jsonify({"error": True,"message": "server error"}), 500
+
+@app.route("/api/booking", methods=["DELETE"])
+def apiDeleteReservation():
+	try:
+		print(request.json["id"])
+		br.deleteReservationById(request.json["id"])
+		return jsonify({"ok": True})
+	except TypeError :
+		return jsonify({"error": True,"message": "Invalid argument"}), 400
+	except ValueError :
+		return jsonify({"error": True,"message": "Id not found"}), 400
+	except Exception as e:
+		print(e)
+		return jsonify({"error": True,"message": "server error"}), 500
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3000, debug = True)

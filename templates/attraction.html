@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- 共用元件區域 -->
+    <!-- 共用元件區域-Start -->
     <!-- 登入及註冊modal -->
     <div class = "BlackCover"></div>
     <div class = "Modal">
@@ -35,7 +35,7 @@
                 <input class = "SignupInput" name = "name" type="text" placeholder="輸入姓名">
                 <input class = "SignupInput" name = "email" type="text" placeholder="輸入電子郵件">
                 <input class = "SignupInput" name = "password" type="password" placeholder="輸入密碼">
-                <button type = "submit" type = "button" class="SignupFormButton">註冊新帳戶</button>
+                <button type = "submit" class="SignupFormButton">註冊新帳戶</button>
             </form>
             <div class = "ChangeModalToLogin ToggleWord">已經有帳戶了？點此登入</div>
             <div class = SignupMessage></div>
@@ -50,7 +50,12 @@
                 </div>
             </a>
             <div class = "NavItem" id = "sidbarTrigger" >
-                    <div class = "Item">
+                    <a href="/booking">
+                        <div class = "Booking Item">
+                            預定行程
+                        </div>
+                    </a>
+                    <div class = "OpenModal Item show">
                         預定行程
                     </div>
                     <div class = "OpenModal Item show">
@@ -62,7 +67,7 @@
             </div>
         </div>
     </div>
-    <!-- 共用元件區域 -->
+    <!-- 共用元件區域-End -->
     <div class ="Content">
         <div class = "Main">
             <div class = "CarouselWrapper">
@@ -80,7 +85,7 @@
                 <div class = "AttractionReserveBottom">
                     <div class = "title">訂購導覽行程</div>
                     <div class = "text">以此景點為中心的一日行程，帶你探索城市角落故事</div>
-                    <form class="Reserve">
+                    <form class="ReserveForm" action="javascript:void(-1)">
                         <div>
                             <label class = "Value">選擇日期:
                                 <input class = "ReserveDate" type="date" name="reserveDate" placeholder="dd-mm-yyyy">
@@ -112,15 +117,18 @@
         </div>
     </div>
 
-    <div class = "Footer">
-        <div class = "FooterContent">
-            COPYRIGHT © 2021 台北一日遊
+    <div class = "FooterWrapper">
+        <div class = "Footer">
+            <div class = "FooterContent">
+                COPYRIGHT © 2021 台北一日遊
+            </div>
         </div>
     </div>
-    <script type="module" src="../scripts/dataService.js"></script>
-    <script type="module" src="../scripts/attractionCarouselController.js"></script>
-    <script type="module" src="../scripts/attractionReserveController.js"></script>
-    <script type="module" src="../scripts/memberService.js"></script>
-    <script type="module" src="../scripts/modalController.js"></script>
-    <script type="module" src="../scripts/navbarController.js"></script>
+    <script type="module" src="../scripts/service/dataService.js"></script>
+    <script type="module" src="../scripts/service/memberService.js"></script>
+
+    <script type="module" src="../scripts/controller/attractionCarouselController.js"></script>
+    <script type="module" src="../scripts/controller/attractionReserveController.js"></script>
+    <script type="module" src="../scripts/controller/modalController.js"></script>
+    <script type="module" src="../scripts/controller/navbarController.js"></script>
 </body>
