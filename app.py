@@ -168,8 +168,8 @@ def apiAddAttraction():
 			decodeJwt["id"]
 		)
 		return jsonify({"ok": True})
-	except TypeError :
-		return jsonify({"error": True,"message": "Invalid argument"}), 400
+	except jwt.PyJWTError as e :
+		return jsonify({"error": True,"message": "NEED_LOGIN"}), 400
 	except ValueError :
 		return jsonify({"error": True,"message": "Id not found"}), 400
 	except Exception as e:

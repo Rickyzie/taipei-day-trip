@@ -28,11 +28,11 @@ export default class BookingService {
             const response = await fetch('/api/booking', requestOptions);
             const result = await response.json();
             if(result.error){
-                console.log(result);
+                callback(result);
                 return
             }
             if(result.ok){
-                console.log(result);
+                callback(result);
                 return
             }
         }catch(err){

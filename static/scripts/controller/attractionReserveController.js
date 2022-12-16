@@ -1,10 +1,12 @@
 import DataService from "../service/dataService.js";
 import BookingService from "../service/bookingService.js";
+import ModalController from "./modalController.js";
 class AttractionReserveController {
 
     #dataService;
 
     #bookingService;
+    modalController;
 
     arguement = {
         morning:2000,
@@ -14,6 +16,7 @@ class AttractionReserveController {
     constructor(){
         this.#dataService = DataService.getInstance();
         this.#bookingService = BookingService.getInstance();
+        this.modalController = ModalController.getInstance();
 
         this.render(this.AttractionReserveComponent, this.getUrlId(), ()=>{
             this.ReserveTimeHandler();
@@ -23,7 +26,16 @@ class AttractionReserveController {
 
     reserve(){
         const reserveFormData = this.getReserveFormData();
-        if(!!reserveFormData) this.#bookingService.reserve(reserveFormData);
+        if(!!reserveFormData) this.#bookingService.reserve(reserveFormData, (result)=>{
+            if(result.error && result.message === "NEED_LOGIN"){
+                this.modalController.OpenModal();
+                return
+            }
+            if(result.ok){
+                alert("預約成功");
+                return
+            }
+        });
     }
 
     ReserveFormHandler(){
