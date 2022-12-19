@@ -1,4 +1,5 @@
 from flask import *
+import requests
 from repository.attractionRepository import AttractionRepository
 from repository.userRepository import UserRepository
 from repository.bookingRepository import BookingRepository
@@ -194,7 +195,7 @@ def apiGetAttractions():
 @app.route("/api/booking", methods=["DELETE"])
 def apiDeleteReservation():
 	try:
-		print(request.json["id"])
+		jwt.decode(request.cookies.get('token'), 'secret', algorithms='HS256')
 		br.deleteReservationById(request.json["id"])
 		return jsonify({"ok": True})
 	except TypeError :
@@ -204,6 +205,39 @@ def apiDeleteReservation():
 	except Exception as e:
 		print(e)
 		return jsonify({"error": True,"message": "server error"}), 500
+
+@app.route("/api/orders", methods=["POST"])
+def apiPostOrders():
+	try:
+		decodeJwt = jwt.decode(request.cookies.get('token'), 'secret', algorithms='HS256')
+		attractions = br.getAttractionsById(decodeJwt["id"])
+		totalPrice  = int()
+		for a in attractions:
+			totalPrice+= a["price"]
+		partner_key = ""
+		json = {
+			"prime": request.json["prime"],
+			"partner_key": partner_key,
+			"merchant_id": "rickyzie_CTBC",
+			"details":"TapPay Test",
+			"amount": totalPrice,
+			"cardholder":request.json["cardholder"],
+			"remember": True
+		}
+		print(json)
+		headers = {
+			"Content-Type": "application/json",
+			"x-api-key": partner_key
+		}
+
+		r = requests.post('https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime', json = json, headers = headers)
+		print(r.json())
+		return jsonify({"ok": True})
+
+	except Exception as e:
+		print(e)
+		return jsonify({"error": True,"message": "server error"}), 500
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3000, debug = True)

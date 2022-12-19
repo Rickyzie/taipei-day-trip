@@ -80,43 +80,58 @@
             <form class = "Contact Form">
                 <div class = "DivInput">
                     <label class = "Value">聯絡姓名 : 
-                        <input class = "ReserveDate" type="text" name="reserveDate">
+                        <input class = "ReserveDate" type="text" name="name">
                     </label>
                 </div>
                 <div class = "DivInput">
                     <label class = "Value">聯絡信箱 : 
-                        <input class = "ReserveDate" type="text" name="reserveDate">
+                        <input class = "ReserveDate" type="text" name="email">
                     </label>
                 </div>
                 <div class = "DivInput">
                     <label class = "Value">手機號碼 : 
-                        <input class = "ReserveDate" type="text" name="reserveDate">
+                        <input class = "ReserveDate" type="text" name="phone_number">
                     </label>
                 </div>
             </form>
             <div class = "ContactTip">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</div>
             <hr>
             <div class = "FormTitle">信用卡付款資訊</div>
+            <!-- 付款串接區域-End -->
             <form class = "CreditCard Form">
+                <style>
+                    .tpfield {
+                        height: 40px;
+                        width: 200px;
+                        border: 1px solid gray;
+                        margin-left: 5px;
+                        padding: 5px;
+                        border: 1px solid #E8E8E8;
+                    }
+                </style>
+               
+                
+                
+                <!-- 付款串接區域-End -->
                 <div class = "DivInput" >
                     <label class = "Value">卡片號碼 :
-                        <input class = "ReserveDate" type="text" name="reserveDate">
+                        <div class="tpfield" id="card-number"></div>
                     </label>
                 </div>
                 <div class = "DivInput">
                     <label class = "Value">過期時間 :
-                        <input class = "ReserveDate" type="text" name="reserveDate">
+                        <div class="tpfield" id="card-expiration-date"></div>
                     </label>
                 </div>
                 <div class = "DivInput">
                     <label class = "Value">驗證密碼 :
-                        <input class = "ReserveDate" type="text" name="reserveDate">
+                        <div class="tpfield" id="card-ccv"></div>
                     </label>
                 </div>
             </form>
             <hr></hr>
             <div class = "TotalPrice"></div>
-            <div class = "ConfirmAndPay">確認訂購並付款</div>  
+            <button class = "ConfirmAndPay">確認訂購並付款</button>  
         </div>  
     </div>
 
@@ -129,13 +144,16 @@
         </div>
     </div>
 
+
     <script type="module" src="../scripts/service/dataService.js"></script>
     <script type="module" src="../scripts/service/memberService.js"></script>
     <script type="module" src="../scripts/service/reservationsService.js"></script>
 
-
+    <script type="module" src="../scripts/controller/tapPayController.js"></script>
     <script type="module" src="../scripts/controller/modalController.js"></script>
     <script type="module" src="../scripts/controller/navbarController.js"></script>
     <script type="module" src="../scripts/controller/reservationsController.js"></script>
+    
+ 
 
 </body>

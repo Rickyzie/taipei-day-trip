@@ -39,5 +39,30 @@ export default class BookingService {
             console.log(err)
         }
     }
+
+    async postPayHolder({prime, cardholder}, callback = null){
+        try{
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    prime: prime,
+                    cardholder:cardholder
+                    })
+            };
+            const response = await fetch('/api/orders', requestOptions);
+            const result = await response.json();
+            if(result.error && callback){
+                callback(result);
+                return
+            }
+            if(result.ok && callback){
+                callback(result);
+                return
+            }
+        }catch(err){
+            console.log(err)
+        }
+    }
 }
 
