@@ -40,7 +40,7 @@ export default class BookingService {
         }
     }
 
-    async postPayHolder({prime, cardholder}, callback = null){
+    async postPayHolder({prime, cardholder}){
         try{
             const requestOptions = {
                 method: 'POST',
@@ -56,8 +56,8 @@ export default class BookingService {
                 callback(result);
                 return
             }
-            if(result.ok && callback){
-                callback(result);
+            if(result.ok){
+                window.location.href = `/thankyou?number=${result.orderId}`;
                 return
             }
         }catch(err){

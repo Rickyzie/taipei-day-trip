@@ -15,8 +15,10 @@ class TapPayController {
             this.ConfirmButtonHandler();
         })
     }
-
-
+    
+    PayOrder(payHolderData){
+        this.bookingService.postPayHolder(payHolderData)
+    }
 
     addTapPayScript(callback){
         const script = document.createElement('script');
@@ -170,14 +172,12 @@ class TapPayController {
                     alert('get prime error ' + result.msg)
                     return
                 }
-                alert('get prime 成功，prime: ' + result.card.prime)
                 const contactFormData = this.getContactFormData();
                 const payHolderData = {
                     prime: result.card.prime,
                     cardholder: contactFormData
                 }
-                this.bookingService.postPayHolder(payHolderData)
-
+                this.PayOrder(payHolderData)
         
                 // send prime to your server, to pay with Pay by Prime API .
                 // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api

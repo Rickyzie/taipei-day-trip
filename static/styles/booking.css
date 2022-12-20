@@ -240,3 +240,12 @@ Form.CreditCard {
     padding:0 20px;
     border:#448899
 }
+
+.tpfield {
+    height: 40px;
+    width: 200px;
+    margin-left: 5px;
+    padding: 5px;
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+}

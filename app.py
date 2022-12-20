@@ -3,7 +3,9 @@ import requests
 from repository.attractionRepository import AttractionRepository
 from repository.userRepository import UserRepository
 from repository.bookingRepository import BookingRepository
+from repository.orderRepository import OrderRepository
 
+from datetime import datetime
 
 import time
 import jwt
@@ -14,6 +16,7 @@ import re
 ar =  AttractionRepository()
 ur = UserRepository()
 br = BookingRepository()
+dr = OrderRepository()
 app = Flask(__name__,
             static_folder="static",
             static_url_path="/")
@@ -222,22 +225,24 @@ def apiPostOrders():
 			"details":"TapPay Test",
 			"amount": totalPrice,
 			"cardholder":request.json["cardholder"],
-			"remember": True
+			"remember": True,
+			"order_number": datetime.now().strftime('%Y%m%d%H%M%S'),
+			"bank_transaction_id": datetime.now().strftime('%Y%m%d%H%M%S')
 		}
-		print(json)
 		headers = {
 			"Content-Type": "application/json",
 			"x-api-key": partner_key
 		}
+		tapPayResponese = requests.post('https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime', json = json, headers = headers)
+		tapPayData = tapPayResponese.json()
+		isSuccess = dr.addOrder(decodeJwt["id"], request.json["cardholder"]["name"], request.json["cardholder"]["email"], request.json["cardholder"]["phone_number"], tapPayData["order_number"], tapPayData["bank_transaction_id"])
 
-		r = requests.post('https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime', json = json, headers = headers)
-		print(r.json())
-		return jsonify({"ok": True})
+		if isSuccess:
+			dr.deleteCartByUserId(decodeJwt["id"])
+		return jsonify({"ok": True, "orderId": tapPayData["order_number"]})
 
-	except Exception as e:
-		print(e)
+	except Exception:
 		return jsonify({"error": True,"message": "server error"}), 500
-
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=3000, debug = True)
