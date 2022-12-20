@@ -22,7 +22,6 @@ export default class ReservationsService {
             const result = await response.json();
             if(result.error){
                 console.log(result)
-                alert("刪除失敗")
                 return
             }
             component(result.data)

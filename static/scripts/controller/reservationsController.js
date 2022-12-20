@@ -125,7 +125,9 @@ export default class ReservationsController {
 
     UserTextHandler(){
         this.memberService.getMemberWithCookie((result)=>{
-            document.querySelector(".UserText").textContent = "您好，" + result.data.name + "，待預訂的行程如下："
+            if(result.data){
+                document.querySelector(".UserText").textContent = "您好，" + result.data.name + "，待預訂的行程如下："
+            }
         })
     }
 
