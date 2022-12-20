@@ -109,7 +109,6 @@ class TapPayController {
     CardInputHandler(){
         const submitButton = document.querySelector(".ConfirmAndPay")
         TPDirect.card.onUpdate(function (update) {
-            console.log(update)
             // update.canGetPrime === true
             // --> you can call TPDirect.card.getPrime()
             if (update.canGetPrime) {

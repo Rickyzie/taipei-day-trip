@@ -14,7 +14,6 @@ export default class BookingService {
 
     async reserve({attractionId, date, time, price}, callback){
         try{
-            console.log(attractionId, date, time, price)
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
