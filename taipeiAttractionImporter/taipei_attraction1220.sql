@@ -74,7 +74,7 @@ CREATE TABLE `cart` (
   KEY `chart_id_fk_idx` (`reservation_id`),
   CONSTRAINT `reservation_id_fk` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `user_id_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=158 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -83,7 +83,6 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (132,18,132),(133,18,133),(134,18,134),(135,18,135),(136,18,136),(137,18,137),(138,18,138),(139,18,139),(140,18,140),(141,18,141),(142,18,142),(143,18,143);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,11 +119,13 @@ DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order` (
-  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `id` varchar(45) NOT NULL,
   `user_id` int unsigned NOT NULL,
   `name` varchar(45) NOT NULL,
   `email` varchar(45) NOT NULL,
   `phone` varchar(45) NOT NULL,
+  `order_number` varchar(45) DEFAULT NULL,
+  `bank_transaction_id` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_order_1_idx` (`user_id`),
   CONSTRAINT `fk_order_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
@@ -137,6 +138,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` VALUES ('20221220192142',18,'asdasd','asdasd','asdasd','20221220192142','20221220192142'),('20221220193037',18,'asd','asd','asd','20221220193037','20221220193037'),('20221220193842',18,'asd','asd','asd','20221220193842','20221220193842');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,17 +151,17 @@ DROP TABLE IF EXISTS `order_reservation`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `order_reservation` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `order_id` int unsigned NOT NULL,
+  `order_id` varchar(45) NOT NULL,
   `attraction_id` int NOT NULL,
   `date` date NOT NULL,
   `time` varchar(45) NOT NULL,
   `price` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_order_reservation_1_idx` (`order_id`),
   KEY `fk_order_reservation_2_idx` (`attraction_id`),
+  KEY `fk_order_reservation_1_idx` (`order_id`),
   CONSTRAINT `fk_order_reservation_1` FOREIGN KEY (`order_id`) REFERENCES `order` (`id`),
   CONSTRAINT `fk_order_reservation_2` FOREIGN KEY (`attraction_id`) REFERENCES `attraction` (`_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,6 +170,7 @@ CREATE TABLE `order_reservation` (
 
 LOCK TABLES `order_reservation` WRITE;
 /*!40000 ALTER TABLE `order_reservation` DISABLE KEYS */;
+INSERT INTO `order_reservation` VALUES (20,'20221220192142',2,'2022-12-31','morning',2000),(21,'20221220193037',4,'2022-12-17','morning',2000),(22,'20221220193842',3,'2022-12-23','morning',2000);
 /*!40000 ALTER TABLE `order_reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +191,7 @@ CREATE TABLE `reservation` (
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `attraction_id_fk_idx` (`attraction_id`),
   CONSTRAINT `attraction_id_fk` FOREIGN KEY (`attraction_id`) REFERENCES `attraction` (`_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=158 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,7 +200,6 @@ CREATE TABLE `reservation` (
 
 LOCK TABLES `reservation` WRITE;
 /*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
-INSERT INTO `reservation` VALUES (132,2,'2022-12-20','morning',2000),(133,2,'2022-12-15','morning',2000),(134,2,'2022-12-15','morning',2000),(135,2,'2022-12-15','morning',2000),(136,2,'2022-12-22','morning',2000),(137,2,'2022-12-22','afternoon',2500),(138,2,'2022-12-22','afternoon',2500),(139,2,'2022-12-21','morning',2000),(140,2,'2022-12-21','morning',2000),(141,2,'2022-12-21','morning',2000),(142,2,'2022-12-21','morning',2000),(143,2,'2022-12-21','morning',2000);
 /*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -238,4 +240,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-19 22:31:07
+-- Dump completed on 2022-12-20 19:40:22
