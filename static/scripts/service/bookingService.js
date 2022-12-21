@@ -14,7 +14,6 @@ export default class BookingService {
 
     async reserve({attractionId, date, time, price}, callback){
         try{
-            console.log(attractionId, date, time, price)
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -33,6 +32,31 @@ export default class BookingService {
             }
             if(result.ok){
                 callback(result);
+                return
+            }
+        }catch(err){
+            console.log(err)
+        }
+    }
+
+    async postPayHolder({prime, cardholder}){
+        try{
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    prime: prime,
+                    cardholder:cardholder
+                    })
+            };
+            const response = await fetch('/api/orders', requestOptions);
+            const result = await response.json();
+            if(result.error){
+                console.log(result)
+                return
+            }
+            if(result.ok){
+                window.location.href = `/thankyou?number=${result.orderId}`;
                 return
             }
         }catch(err){

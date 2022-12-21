@@ -43,10 +43,10 @@ export default class ReservationsService {
             const response = await fetch('/api/booking', requestOptions);
             const result = await response.json();
             if(result.error){
-                console.log(result)
+                alert(error.message)
                 return
             }
-            if(callback) callback();
+            if(callback && result.ok) callback(result);
         }catch(err){
             console.log(err)
         }

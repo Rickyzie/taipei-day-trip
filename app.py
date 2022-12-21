@@ -1,8 +1,11 @@
 from flask import *
+import requests
 from repository.attractionRepository import AttractionRepository
 from repository.userRepository import UserRepository
 from repository.bookingRepository import BookingRepository
+from repository.orderRepository import OrderRepository
 
+from datetime import datetime
 
 import time
 import jwt
@@ -13,6 +16,7 @@ import re
 ar =  AttractionRepository()
 ur = UserRepository()
 br = BookingRepository()
+dr = OrderRepository()
 app = Flask(__name__,
             static_folder="static",
             static_url_path="/")
@@ -194,7 +198,7 @@ def apiGetAttractions():
 @app.route("/api/booking", methods=["DELETE"])
 def apiDeleteReservation():
 	try:
-		print(request.json["id"])
+		jwt.decode(request.cookies.get('token'), 'secret', algorithms='HS256')
 		br.deleteReservationById(request.json["id"])
 		return jsonify({"ok": True})
 	except TypeError :
@@ -203,6 +207,41 @@ def apiDeleteReservation():
 		return jsonify({"error": True,"message": "Id not found"}), 400
 	except Exception as e:
 		print(e)
+		return jsonify({"error": True,"message": "server error"}), 500
+
+@app.route("/api/orders", methods=["POST"])
+def apiPostOrders():
+	try:
+		decodeJwt = jwt.decode(request.cookies.get('token'), 'secret', algorithms='HS256')
+		attractions = br.getAttractionsById(decodeJwt["id"])
+		totalPrice  = int()
+		for a in attractions:
+			totalPrice+= a["price"]
+		partner_key = ""
+		json = {
+			"prime": request.json["prime"],
+			"partner_key": partner_key,
+			"merchant_id": "rickyzie_CTBC",
+			"details":"TapPay Test",
+			"amount": totalPrice,
+			"cardholder":request.json["cardholder"],
+			"remember": True,
+			"order_number": datetime.now().strftime('%Y%m%d%H%M%S'),
+			"bank_transaction_id": datetime.now().strftime('%Y%m%d%H%M%S')
+		}
+		headers = {
+			"Content-Type": "application/json",
+			"x-api-key": partner_key
+		}
+		tapPayResponese = requests.post('https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime', json = json, headers = headers)
+		tapPayData = tapPayResponese.json()
+		isSuccess = dr.addOrder(decodeJwt["id"], request.json["cardholder"]["name"], request.json["cardholder"]["email"], request.json["cardholder"]["phone_number"], tapPayData["order_number"], tapPayData["bank_transaction_id"])
+
+		if isSuccess:
+			dr.deleteCartByUserId(decodeJwt["id"])
+		return jsonify({"ok": True, "orderId": tapPayData["order_number"]})
+
+	except Exception:
 		return jsonify({"error": True,"message": "server error"}), 500
 
 if __name__ == "__main__":

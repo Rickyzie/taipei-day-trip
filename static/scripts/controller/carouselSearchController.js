@@ -8,7 +8,6 @@ class CarouselSearchController {
         this.#dataService = DataService.getInstance();
         this.contentController = ContentController.getInstance();
         this.render(this.SearchAutoCompleteComponent, ()=>{
-            console.log(1)
             this.SearchAutoCompleteItemHandler();
         });
         this.CarouselButtonHandler();

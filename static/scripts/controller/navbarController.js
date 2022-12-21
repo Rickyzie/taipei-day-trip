@@ -26,7 +26,7 @@ export default class NavbarController {
         this.AddOpenModalHandler();
         this.AddLogoutModalHandler();
     }
-
+ㄑ
     InitOpenModal(result){
         if(result.data){
             this.ChangeOpenModalToLogout();

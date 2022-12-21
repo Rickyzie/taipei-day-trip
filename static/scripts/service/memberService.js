@@ -108,7 +108,9 @@ export default class MemberService {
             };
             const response = await fetch('/api/user/auth', requestOptions);
             const result = await response.json();
-            callback(result)
+            if(result.data){
+                callback(result)
+            }
         }catch(err){
             console.log(err)
         }

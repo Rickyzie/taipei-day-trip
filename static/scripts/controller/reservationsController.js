@@ -106,7 +106,6 @@ export default class ReservationsController {
             Reservation.appendChild(ImgWrapper);
             const IconDelete = document.createElement("div");
             IconDelete.setAttribute("class", "IconDelete");
-            IconDelete.setAttribute("id", reservationId.toString())
             IconDelete.style.backgroundImage = `url(../images/icon_delete.png)`;
         
 
@@ -126,7 +125,9 @@ export default class ReservationsController {
 
     UserTextHandler(){
         this.memberService.getMemberWithCookie((result)=>{
-            document.querySelector(".UserText").textContent = "您好，" + result.data.name + "，待預訂的行程如下："
+            if(result.data){
+                document.querySelector(".UserText").textContent = "您好，" + result.data.name + "，待預訂的行程如下："
+            }
         })
     }
 
@@ -134,22 +135,28 @@ export default class ReservationsController {
         const IconDelete = document.querySelectorAll(".IconDelete")
         IconDelete.forEach((element,index)=>{
             element.addEventListener("click", (e)=>{
-                const reservation = e.path[1];
-                reservation.remove();
-                this.deleteReservation(this.reservationList[index].reservationId);
-                this.reservationList[index] = {};
-                this.ChangeTotalPrice();
-                if(document.querySelector(".Reservations").children.length<=1){
-                    document.querySelector(".ReservationNone").classList.add("show");
-                    document.querySelector(".ConfirmForm").classList.remove("show");
-
-                }
+                this.deleteReservation(this.reservationList[index].reservationId, (result)=>{
+                    alert("刪除成功")
+                    const reservation = e.path[1];
+                    reservation.remove();
+                    this.reservationList[index] = {};
+                    this.ChangeTotalPrice();
+                    this.CheckRervations();
+                    
+                });
             })
         })
     }
 
-    deleteReservation(id){
-        this.reservationService.deleteReservtionById(id);
+    CheckRervations(){
+        if(document.querySelector(".Reservations").children.length<=1){
+            document.querySelector(".ReservationNone").classList.add("show");
+            document.querySelector(".ConfirmForm").classList.remove("show");
+        }
+    }
+
+    deleteReservation(id, callback){
+        this.reservationService.deleteReservtionById(id, callback);
     }
 }
 
