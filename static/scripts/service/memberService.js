@@ -25,7 +25,7 @@ export default class MemberService {
                 return
             }
             if(!this.passwordRegex.test(password)) {
-                callback("密碼請輸入8至15中英混合字元");
+                callback("密碼請輸入8至15數英混合字元");
                 return
             }
             const requestOptions = {
